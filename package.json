@@ -8,7 +8,8 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
     "vuetify": "^0.17.6",
@@ -18,8 +19,8 @@
   "devDependencies": {
     "autoprefixer": "^7.1.5",
     "babel-core": "^6.26.0",
-    "sw-precache-webpack-plugin": "^0.11.4",
     "babel-eslint": "^8.0.1",
+    "babel-jest": "^22.2.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
@@ -31,12 +32,12 @@
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
     "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.2.2",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.0",
-    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "^0.9.6",
@@ -46,22 +47,30 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.4",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "semver": "^5.4.1",
-    "shelljs": "^0.7.8",
+    "jest": "^22.2.2",
+    "jest-serializer-vue": "^0.3.0",
+    "jest-vue-preprocessor": "^1.3.1",
+    "jsdom": "^11.6.2",
     "opn": "^5.1.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.3.0",
     "rimraf": "^2.6.2",
+    "semver": "^5.4.1",
+    "shelljs": "^0.7.8",
+    "sw-precache-webpack-plugin": "^0.11.4",
+    "uglify-es": "^3.1.3",
     "url-loader": "^0.6.2",
+    "vue-jest": "^2.1.0",
     "vue-loader": "^13.3.0",
+    "vue-server-renderer": "^2.5.13",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.2",
+    "vue-test-utils": "^1.0.0-beta.11",
     "webpack": "^3.7.1",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1",
-    "webpack-merge": "^4.1.0",
-    "uglify-es": "^3.1.3"
+    "webpack-merge": "^4.1.0"
   },
   "engines": {
     "node": ">= 4.0.0",
@@ -71,5 +80,23 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "mapCoverage": true
+  }
 }
