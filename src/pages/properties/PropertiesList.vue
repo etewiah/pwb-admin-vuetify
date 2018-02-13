@@ -43,8 +43,7 @@ export default {
   },
   computed: {
     properties() {
-      return []
-      // return this.$store.state.propertiesStore.properties
+      return this.$store.state.propertiesStore.properties
     }
   },
   mounted: function() {

@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import PropertiesList from '@/pages/properties/PropertiesList'
+import SingleProperty from '@/pages/properties/SingleProperty'
+import SinglePropertyTab from '@/pages/properties/SinglePropertyTab'
 import GenericContainer from '@/pages/GenericContainer'
 
 Vue.use(Router)
@@ -27,7 +29,7 @@ export default new Router({
       }, {
         path: ':id',
         name: 'singleProperty',
-        // component: SingleProperty,
+        component: SingleProperty,
         children: [{
           path: '',
           redirect: to => {
@@ -42,7 +44,7 @@ export default new Router({
         }, {
           name: 'singlePropertyTab',
           path: ':tabName',
-          // component: PropertyDetails
+          component: SinglePropertyTab
         }]
       }]
     }
