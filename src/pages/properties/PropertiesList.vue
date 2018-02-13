@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted: function() {
-    // this.$store.dispatch('loadProperties')
+    this.$store.dispatch('loadProperties')
   },
   methods: {
 
