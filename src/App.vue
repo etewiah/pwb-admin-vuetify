@@ -86,6 +86,9 @@ export default {
       title: 'Vuetify.js'
     }
   },
-  name: 'App'
+  name: 'App',
+  mounted: function () {
+    debugger
+  }
 }
 </script>
