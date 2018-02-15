@@ -9,7 +9,7 @@
         </v-layout>
         <v-layout wrap row>
           <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in mainInputFields">
+            <template v-for="(fieldDetails) in mainInputFields1">
               <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
             </template>
           </v-flex>
@@ -19,7 +19,12 @@
             </template>
           </v-flex>
           <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in longTermRentalInputFields">
+            <template v-for="(fieldDetails) in mainInputFields3">
+              <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+            </template>
+          </v-flex>
+          <v-flex xs12 sm3>
+            <template v-for="(fieldDetails) in mainInputFields4">
               <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
             </template>
           </v-flex>
@@ -51,7 +56,32 @@ export default {
   },
   data() {
     return {
-      mainInputFields: [{
+      mainInputFields1: [{
+        labelTextTKey: "fieldLabels.visibleOnWeb",
+        tooltipTextTKey: "toolTips.visible",
+        fieldName: "visible",
+        // fieldType: "simpleSelect",
+        inputType: "trueFalse",
+        fieldDbType: "boolean",
+        // }, {
+        //   labelTextTKey: "fieldLabels.highlighted",
+        //   tooltipTextTKey: "toolTips.highlighted",
+        //   fieldName: "highlighted",
+        //   fieldType: "simpleSelect",
+        //   fieldDbType: "boolean",
+        // }, {
+        //   labelTextTKey: "fieldLabels.label",
+        //   fieldName: "observacionesVenta",
+        //   fieldType: "dynamicSelect",
+        //   optionsKey: "property-labels",
+      }, {
+        labelTextTKey: "fieldLabels.currency",
+        // headerTextTKey: "fieldLabels.currency",
+        inputType: "select",
+        fieldName: "currency",
+        optionsKey: "currencies",
+      }],
+      mainInputFields2: [{
         labelTextTKey: "fieldLabels.ref",
         tooltipTextTKey: "toolTips.ref",
         fieldName: "reference",
@@ -73,7 +103,7 @@ export default {
         inputType: "select",
         optionsKey: "property-states",
       }],
-      mainInputFields2: [{
+      mainInputFields3: [{
         labelTextTKey: "fieldLabels.countBedrooms",
         tooltipTextTKey: false,
         fieldName: "count_bedrooms",
@@ -136,133 +166,43 @@ export default {
           }
         }
       }],
-
-      longTermRentalInputFields: [{
-        labelTextTKey: "fieldLabels.longTermRental",
-        tooltipTextTKey: "toolTips.longTermRental",
-        fieldName: "for_rent_long_term",
-        inputType: "trueFalse",
-        fieldDbType: "boolean",
-      }, {
-        labelTextTKey: "fieldLabels.priceRentalMonthlyCurrent",
-        tooltipTextTKey: "toolTips.priceRentalMonthlyCurrent",
-        fieldName: "price_rental_monthly_current_cents",
-        fieldType: "simpleInput",
-        inputType: "number",
-        fieldDbType: "int",
-        constraints: {
-          inputValue: {
-            numericality: {
-              onlyInteger: true,
-              lessThanOrEqualTo: 999999999,
-            }
-          }
-        }
-      }, {
-        labelTextTKey: "fieldLabels.priceRentalMonthlyOriginal",
-        tooltipTextTKey: "toolTips.priceRentalMonthlyOriginal",
-        fieldName: "price_rental_monthly_original_cents",
-        fieldType: "simpleInput",
-        inputType: "number",
-        fieldDbType: "int",
-        constraints: {
-          inputValue: {
-            numericality: {
-              onlyInteger: true,
-              lessThanOrEqualTo: 999999999,
-            }
-          }
-        }
-      }, ],
-      shortTermRentalInputFields: [{
-        labelTextTKey: "fieldLabels.seasonalRental",
-        tooltipTextTKey: "toolTips.seasonalRental",
-        fieldName: "for_rent_short_term",
-        inputType: "trueFalse",
-        fieldDbType: "boolean",
-      }, {
-        labelTextTKey: "fieldLabels.priceRentalMonthlyLowSeason",
+      mainInputFields4: [{
+        labelTextTKey: "fieldLabels.plotArea",
         tooltipTextTKey: false,
-        fieldName: "price_rental_monthly_low_season_cents",
+        fieldName: "plot_area",
         fieldType: "simpleInput",
         inputType: "number",
-        fieldDbType: "int",
         constraints: {
           inputValue: {
             numericality: {
               onlyInteger: true,
-              lessThanOrEqualTo: 999999999,
+              greaterThan: 0,
+              lessThanOrEqualTo: 1000000,
             }
           }
         }
       }, {
-        labelTextTKey: "fieldLabels.priceRentalMonthlyStandardSeason",
+        labelTextTKey: "fieldLabels.constructedArea",
         tooltipTextTKey: false,
-        fieldName: "price_rental_monthly_standard_season_cents",
+        fieldName: "constructed_area",
         fieldType: "simpleInput",
         inputType: "number",
-        fieldDbType: "int",
         constraints: {
           inputValue: {
             numericality: {
               onlyInteger: true,
-              lessThanOrEqualTo: 999999999,
+              greaterThan: 0,
+              lessThanOrEqualTo: 1000000,
             }
           }
         }
       }, {
-        labelTextTKey: "fieldLabels.priceRentalMonthlyHighSeason",
-        tooltipTextTKey: false,
-        fieldName: "priceRentalMonthlyHighSeasonCents",
-        fieldType: "simpleInput",
-        inputType: "number",
-        fieldDbType: "int",
-        constraints: {
-          inputValue: {
-            numericality: {
-              onlyInteger: true,
-              lessThanOrEqualTo: 999999999,
-            }
-          }
-        }
+        labelTextTKey: "fieldLabels.areaUnit",
+        // headerTextTKey: "fieldLabels.currency",
+        inputType: "select",
+        fieldName: "area_unit",
+        optionsKey: "area-units",
       }],
-      saleInputFields: [{
-        labelTextTKey: "fieldLabels.forSale",
-        tooltipTextTKey: "toolTips.forSale",
-        fieldName: "for_sale",
-        inputType: "trueFalse",
-        fieldDbType: "boolean",
-      }, {
-        labelTextTKey: "fieldLabels.priceSaleCurrent",
-        tooltipTextTKey: "toolTips.priceSaleCurrent",
-        fieldName: "price_sale_current_cents",
-        fieldType: "simpleInput",
-        inputType: "number",
-        fieldDbType: "int",
-        constraints: {
-          inputValue: {
-            numericality: {
-              onlyInteger: true,
-              lessThanOrEqualTo: 999999999999,
-            }
-          }
-        }
-      }, {
-        labelTextTKey: "fieldLabels.priceSaleOriginal",
-        tooltipTextTKey: "toolTips.priceSaleOriginal",
-        fieldName: "price_sale_original_cents",
-        fieldType: "simpleInput",
-        inputType: "number",
-        fieldDbType: "int",
-        constraints: {
-          inputValue: {
-            numericality: {
-              onlyInteger: true,
-              lessThanOrEqualTo: 999999999999,
-            }
-          }
-        }
-      }, ],
     }
   },
   computed: {
@@ -274,7 +214,7 @@ export default {
     }
   },
   mounted: function() {
-    let fieldNames = "property-origins, property-types, property-states, property-labels"
+    let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
     this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
