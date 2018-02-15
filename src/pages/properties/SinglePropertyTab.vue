@@ -10,7 +10,7 @@
 // import GeneralPropertyDetails from '@/components/properties/details/GeneralPropertyDetails'
 // import TextPropertyDetails from '@/components/properties/details/TextPropertyDetails'
 // import ExtrasPropertyDetails from '@/components/properties/details/ExtrasPropertyDetails'
-// import SalePropertyDetails from '@/components/properties/details/SalePropertyDetails'
+import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
 export default {
   data() {
     return {}
@@ -19,11 +19,12 @@ export default {
     // GeneralPropertyDetails,
     // TextPropertyDetails,
     // ExtrasPropertyDetails,
-    // SalePropertyDetails,
+    SalePropertyDetails,
   },
   computed: {
     propertyDetailsComponent() {
       let currentTabName = this.$route.params["tabName"]
+      // TODO: - use lodash for below:
       let currentPropertyTab = this.findBy(this.$store.state.navigationStore.propertyTabs, currentTabName, 'tabValue')
       return currentPropertyTab[0].componentName
     },
