@@ -4,13 +4,7 @@
       <v-text-field name="title" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" id="title" v-model="currentField"></v-text-field>
     </template>
     <template v-else-if="fieldDetails.inputType == 'select'">
-        <v-select
-          :items="selectItems"
-          v-model="currentField"
-          label="Select"
-          single-line
-          bottom
-        ></v-select>
+      <v-select :items="selectItems" v-model="currentField" label="Select" item-text="name" single-line bottom></v-select>
     </template>
     <template v-else-if="fieldDetails.inputType == 'trueFalse'">
       <SwitchField :fieldDetails="fieldDetails" :switchFieldValue="resourceModel[fieldDetails.fieldName]" v-bind:resourceModel="resourceModel"></SwitchField>
@@ -40,7 +34,20 @@ export default {
   },
   computed: {
     selectItems: function() {
-      return this.fieldOptions[this.fieldDetails.optionsKey] || []
+      let untranslated = this.fieldOptions[this.fieldDetails.optionsKey] || null
+      let selectItems = []
+      let i18n = this.$i18n
+      if (untranslated) {
+        untranslated.forEach(function(optionKey) {
+          let name = i18n.t(optionKey)
+          selectItems.push({
+            name: name,
+            value: optionKey
+          })
+        })
+        // debugger
+      }
+      return selectItems
     },
     currentField: {
       get() {
