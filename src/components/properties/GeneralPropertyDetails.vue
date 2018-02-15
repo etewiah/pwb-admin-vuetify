@@ -2,10 +2,8 @@
   <v-layout row>
     <v-flex xs12>
       <form @submit.prevent="onUpdateProperty">
-        <v-layout v-if="hasPendingChanges" row>
-          <v-flex xs12 sm12 offset-sm0>
-            <v-btn class="primary" type="submit">Update</v-btn>
-          </v-flex>
+        <v-layout row>
+          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
         </v-layout>
         <v-layout wrap row>
           <v-flex xs12 sm3>
@@ -30,9 +28,7 @@
           </v-flex>
         </v-layout>
         <v-layout row>
-          <v-flex xs12 sm12 offset-sm0>
-            <v-btn class="primary" type="submit">Update</v-btn>
-          </v-flex>
+          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
         </v-layout>
       </form>
     </v-flex>
@@ -40,10 +36,12 @@
 </template>
 <script>
 import FieldResolver from '@/components/form-fields/FieldResolver'
+import FormSubmitter from '@/components/form-fields/FormSubmitter'
 // import { required } from 'vuelidate/lib/validators'
 export default {
   components: {
-    FieldResolver
+    FieldResolver,
+    FormSubmitter
   },
   props: ["currentProperty"],
   watch: {},
