@@ -3,9 +3,18 @@
     <template v-if="fieldDetails.inputType == 'number'">
       <v-text-field name="title" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" id="title" v-model="currentField"></v-text-field>
     </template>
+    <template v-else-if="fieldDetails.inputType == 'select'">
+        <v-select
+          :items="selectItems"
+          v-model="currentField"
+          label="Select"
+          single-line
+          bottom
+        ></v-select>
+    </template>
     <template v-else-if="fieldDetails.inputType == 'trueFalse'">
       <SwitchField :fieldDetails="fieldDetails" :switchFieldValue="resourceModel[fieldDetails.fieldName]" v-bind:resourceModel="resourceModel"></SwitchField>
-<!--       <div class="text-xs-left">
+      <!--       <div class="text-xs-left">
         {{$t(fieldDetails.labelTextTKey) }}
       </div>
       <v-flex xs12>
@@ -25,20 +34,23 @@ export default {
   components: {
     SwitchField
   },
-  props: ["resourceModel", "fieldDetails"],
+  props: ["resourceModel", "fieldDetails", "fieldOptions"],
   data() {
     return {}
   },
   computed: {
+    selectItems: function() {
+      return this.fieldOptions[this.fieldDetails.optionsKey] || []
+    },
     currentField: {
       get() {
-        if (this.fieldDetails.inputType === "trueFalse") {
-          if (this.resourceModel[this.fieldDetails.fieldName]) {
-            return true
-          } else {
-            return false
-          }
-        }
+        // if (this.fieldDetails.inputType === "trueFalse") {
+        //   if (this.resourceModel[this.fieldDetails.fieldName]) {
+        //     return true
+        //   } else {
+        //     return false
+        //   }
+        // }
         return _.clone(this.resourceModel[this.fieldDetails.fieldName])
       },
       // // setter

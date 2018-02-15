@@ -7,16 +7,16 @@
   </v-container>
 </template>
 <script>
-// import GeneralPropertyDetails from '@/components/properties/details/GeneralPropertyDetails'
-// import TextPropertyDetails from '@/components/properties/details/TextPropertyDetails'
-// import ExtrasPropertyDetails from '@/components/properties/details/ExtrasPropertyDetails'
+import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
+// import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
+// import ExtrasPropertyDetails from '@/components/properties/ExtrasPropertyDetails'
 import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
 export default {
   data() {
     return {}
   },
   components: {
-    // GeneralPropertyDetails,
+    GeneralPropertyDetails,
     // TextPropertyDetails,
     // ExtrasPropertyDetails,
     SalePropertyDetails,

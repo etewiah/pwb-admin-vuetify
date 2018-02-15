@@ -11,6 +11,7 @@ const state = {
   currentProperty: {
     attributes: {}
   },
+  fieldOptions: {}
 }
 
 // getters
@@ -20,6 +21,21 @@ const getters = {
 
 // actions
 const actions = {
+
+
+  loadPropertyFieldOptions: function({ commit }, fieldNames) {
+    axios.get('/api/v1/select_values', {
+      params: {
+        field_names: fieldNames
+      }
+    }).then((response) => {
+      // this data isn't monitored so setting it directly
+      state.fieldOptions = response.data
+      // commit('setProperties', { result: response.data })
+    }, (err) => {
+      console.log(err)
+    })
+  },
   loadProperties: function({ commit }) {
     axios.get('/api/v2/properties', {
       headers: {
@@ -53,7 +69,6 @@ const actions = {
     state.pendingChanges = {}
 
     // console.log(axios.defaults.headers.common)
-    // debugger
     axios.put(apiUrl, {
       property: state.currentProperty
     }, {
@@ -92,7 +107,6 @@ const actions = {
       // fieldHasChanged = (parseInt(fieldDetails.newValue) !== state.currentProperty[fieldDetails.fieldName])
     }
     fieldHasChanged = (newValue !== state.currentProperty[fieldDetails.fieldName])
-    // debugger
     if (fieldHasChanged) {
       state.pendingChanges[fieldDetails.fieldName] = fieldDetails.newValue
       // pendingChange[fieldDetails.fieldName] = fieldDetails.newValue
