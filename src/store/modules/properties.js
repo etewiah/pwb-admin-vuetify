@@ -35,10 +35,7 @@ const actions = {
   loadProperty: function({ commit }, propertyId) {
     let apiUrl = '/api/v2/properties/' + propertyId
     axios.get(apiUrl, {
-      headers: {
-        'Content-Type': 'application/vnd.api+json',
-        'Accept': 'application/vnd.api+json'
-      }
+
     }).then((response) => {
       commit('setCurrentProperty', { result: response.data })
     }, (err) => {
@@ -47,6 +44,16 @@ const actions = {
   },
   updateProperty({ commit, state }) {
     let apiUrl = '/api/v2/properties/' + state.currentProperty.id
+    if (state.hasPendingChanges) {
+      Object.keys(state.pendingChanges).forEach(function(pendingChangeKey) {
+        state.currentProperty[pendingChangeKey] = state.pendingChanges[pendingChangeKey]
+      })
+    }
+    commit('setHasPendingChanges', false)
+    state.pendingChanges = {}
+
+    // console.log(axios.defaults.headers.common)
+    // debugger
     axios.put(apiUrl, {
       property: state.currentProperty
     }, {
@@ -72,10 +79,14 @@ const actions = {
       commit('setNewProperty', property)
     })
   },
+  // Below will compare changes made to a field's value in a form
+  // to the original value and decide if there are changes
+  // yet to be saved to the server
+  // If there are pending changes, an update button will display
   updatePendingChanges({ commit, state }, fieldDetails) {
+    let fieldHasChanged = false
     // let pendingChange = {}
     let newValue = fieldDetails.newValue
-    let fieldHasChanged = false
     if (fieldDetails.fieldDbType === "int") {
       newValue = parseInt(fieldDetails.newValue)
       // fieldHasChanged = (parseInt(fieldDetails.newValue) !== state.currentProperty[fieldDetails.fieldName])
