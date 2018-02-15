@@ -49,26 +49,25 @@ export default {
   computed: {
     mainNavItems() {
       let mainNavItems = this.$store.state.navigationStore.mainNavItems
-      let adminPageLinks = this.$store.state.pages
+      // let adminPageLinks = this.$store.state.pages
+      // if (adminPageLinks.length > 0) {
+      //   // TODO - sort adminPageLinks
+      //   let pagesNav = mainNavItems[4]
+      //   let linkTitleKey = "link_title_en"
 
-      if (adminPageLinks.length > 0) {
-        // TODO - sort adminPageLinks
-        let pagesNav = mainNavItems[4]
-        let linkTitleKey = "link_title_en"
+      //   adminPageLinks.forEach(function(page) {
+      //     console.log(page)
+      //     let pageNav = {}
+      //     pageNav.href = "site-page-details-default"
+      //     pageNav.text = page[linkTitleKey]
+      //     pageNav.icon = "domain"
+      //     pageNav.router = true
+      //     pageNav.params = {pageName: page["page_slug"]}
+      //     pagesNav.childItems.push(pageNav)
+      //     // debugger
+      //   })
 
-        adminPageLinks.forEach(function(page) {
-          console.log(page)
-          let pageNav = {}
-          pageNav.href = "site-page-details-default"
-          pageNav.text = page[linkTitleKey]
-          pageNav.icon = "domain"
-          pageNav.router = true
-          pageNav.params = {pageName: page["page_slug"]}
-          pagesNav.childItems.push(pageNav)
-          // debugger
-        })
-
-      }
+      // }
       return mainNavItems
 
       //       var pagesNav = leftNavItems.findBy("tabTitleKey", "adminSections.pages");

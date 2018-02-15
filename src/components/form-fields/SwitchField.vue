@@ -27,22 +27,6 @@ export default {
     },
   },
 
-  // computed: {
-  //   currentField: {
-  //     get() {
-  //       if (this.resourceModel[this.fieldDetails.fieldName]) {
-  //         return true
-  //       } else {
-  //         return false
-  //       }
-  //     },
-  //     // // setter
-  //     set(newValue) {
-  //       this.fieldDetails.newValue = newValue
-  //       this.$store.dispatch('updatePendingChanges', this.fieldDetails, newValue)
-  //     }
-  //   }
-  // },
   methods: {
     booleanFieldHandler(newValue) {
       if (newValue) {

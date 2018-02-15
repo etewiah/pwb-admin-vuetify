@@ -46,21 +46,6 @@ export default {
   },
   props: ["currentProperty"],
   watch: {
-    // currentProperty: {
-    //   handler: function(after, before) {
-    //     // Return the object that changed
-    //     var vm = this;
-    //     // let changed = after.filter(function(p, idx) {
-    //     //   return Object.keys(p).some(function(prop) {
-    //     //     return p[prop] !== vm.$data.oldPeople[idx][prop];
-    //     //   })
-    //     // })
-    //     // // Log it
-    //     // vm.setValue();
-    //     // console.log(changed)
-    //     // debugger;
-    //   },
-    // }
   },
   validations: {
     currentProperty: {
@@ -210,12 +195,8 @@ export default {
   // },
   methods: {
     onUpdateProperty() {
-      debugger
-      // this.$store.dispatch('updateProperty')
+      this.$store.dispatch('updateProperty')
     },
-    // changeHandler(param1, param2, param3){
-    //   debugger
-    // }
   }
 }
 

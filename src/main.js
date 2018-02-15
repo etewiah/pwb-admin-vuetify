@@ -6,7 +6,17 @@ import router from './router'
 import store from './store'
 import i18n from './i18n/'
 import Vuetify from 'vuetify'
+import axios from 'axios'
 import 'vuetify/dist/vuetify.min.css'
+
+// let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+
+// below needed for rails to recognise request.xhr?
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+// without above X-CSRF-Token token would not get sent from rails
+// axios.defaults.headers.common['X-CSRF-Token'] = token
+// axios.defaults.headers.common['Accept'] = 'application/json'
+
 
 Vue.use(Vuetify, { theme: {
   primary: '#ee44aa',

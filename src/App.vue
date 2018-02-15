@@ -57,6 +57,7 @@ export default {
   },
   name: 'App',
   mounted: function() {
+    this.$store.dispatch('loadSetupInfo')
   }
 }
 
