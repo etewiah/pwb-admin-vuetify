@@ -5,11 +5,9 @@
         {{$t(fieldDetails.labelTextTKey) }}
       </div>
       <v-flex xs12>
-        <v-switch v-bind:label="fieldLabel" v-model="currentField"></v-switch>
+        <v-switch v-bind:label="fieldLabel" @change="booleanFieldHandler" v-model="fieldValue"></v-switch>
       </v-flex>
     </div>
-    <SwitchField :fieldDetails="fieldDetails" :switchFieldValue="currentField" v-bind:resourceModel="resourceModel"></SwitchField>
-    <v-text-field name="title" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" id="title" v-model="currentField"></v-text-field>
   </div>
 </template>
 <script>
@@ -20,36 +18,77 @@ export default {
   components: {
     SwitchField
   },
-  props: ["resourceModel", "fieldDetails", "fieldOptions"],
+  props: ["resourceModel", "fieldDetails"],
   data() {
     return {
+      fieldValue: false,
       fieldLabel: "No"
     }
   },
-  computed: {
-    currentField: {
-      get() {
-        this.fieldDetails.originalValue = false
-        if (this.resourceModel) {
-          // Features are stored on the server as a list of field keys
-          // The resourceModel represents this list
-          // Any feature in that list should have a value of true
-          // (ie - the property in question has that feature)
-          if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
-            // debugger
-            this.fieldDetails.originalValue = true
-          }
+  // mounted: function() {
+  //   this.fieldDetails.originalValue = false
+  //   if (this.resourceModel) {
+  //     debugger
+  //     // Features are stored on the server as a list of field keys
+  //     // The resourceModel represents this list
+  //     // Any feature in that list should have a value of true
+  //     // (ie - the property in question has that feature)
+  //     if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
+  //       // debugger
+  //       this.fieldLabel = "Yes"
+  //       this.fieldDetails.originalValue = true
+  //     }
+  //   }
+  // },
+  watch: {
+    resourceModel: function(val) {
+      this.fieldDetails.originalValue = false
+      if (this.resourceModel) {
+        // Features are stored on the server as a list of field keys
+        // The resourceModel represents this list
+        // Any feature in that list should have a value of true
+        // (ie - the property in question has that feature)
+        if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
+          // debugger
+          this.fieldLabel = "Yes"
+          this.fieldValue = true
+          this.fieldDetails.originalValue = true
         }
-        return this.fieldDetails.originalValue
-      },
-      // // setter
-      set(newValue) {
-        this.fieldDetails.newValue = newValue
-        this.$store.dispatch('updatePendingPropertyFeatureChanges', this.fieldDetails, newValue)
       }
-    }
+
+    },
   },
-  methods: {}
+  // computed: {
+  //   currentField: {
+  //     get() {
+  //       this.fieldDetails.originalValue = false
+  //       if (this.resourceModel) {
+  //         // Features are stored on the server as a list of field keys
+  //         // The resourceModel represents this list
+  //         // Any feature in that list should have a value of true
+  //         // (ie - the property in question has that feature)
+  //         if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
+  //           // debugger
+  //           this.fieldLabel = "Yes"
+  //           this.fieldDetails.originalValue = true
+  //         }
+  //       }
+  //       return this.fieldDetails.originalValue
+  //     },
+  //   }
+  // },
+  methods: {
+    booleanFieldHandler(newValue) {
+      if (newValue) {
+        this.fieldLabel = "Yes"
+      } else {
+        this.fieldLabel = "No"
+      }
+      this.fieldDetails.newValue = newValue
+      this.$store.dispatch('updatePendingPropertyFeatureChanges', this.fieldDetails, newValue)
+    }
+  }
+
 }
 
 </script>
