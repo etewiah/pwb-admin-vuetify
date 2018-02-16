@@ -9,7 +9,7 @@
 <script>
 import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
 // import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
-// import ExtrasPropertyDetails from '@/components/properties/ExtrasPropertyDetails'
+import FeaturesPropertyDetails from '@/components/properties/FeaturesPropertyDetails'
 import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
 export default {
   data() {
@@ -18,7 +18,7 @@ export default {
   components: {
     GeneralPropertyDetails,
     // TextPropertyDetails,
-    // ExtrasPropertyDetails,
+    FeaturesPropertyDetails,
     SalePropertyDetails,
   },
   computed: {
@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted: function() {
-    this.$store.dispatch('loadProperty', this.$route.params["id"])
+    // this.$store.dispatch('loadProperty', this.$route.params["id"])
   },
   methods: {
     findBy: function(list, value, column) {

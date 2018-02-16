@@ -53,6 +53,8 @@ const actions = {
     axios.get(apiUrl, {
 
     }).then((response) => {
+      commit('setFeaturesPropertyId', { result: response.data.id })
+      // commit('setPropertyFeatures', { result: response.data.features_list })
       commit('setCurrentProperty', { result: response.data })
     }, (err) => {
       console.log(err)

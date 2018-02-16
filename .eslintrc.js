@@ -33,6 +33,7 @@ module.exports = {
     "quotes": 0,
     "comma-dangle": 0,
     "padded-blocks": 0,
-    "indent": 0
+    "indent": 0,
+    "no-trailing-spaces": 0
   }
 }
