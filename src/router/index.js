@@ -5,6 +5,7 @@ import PropertiesList from '@/pages/properties/PropertiesList'
 import SingleProperty from '@/pages/properties/SingleProperty'
 import SinglePropertyTab from '@/pages/properties/SinglePropertyTab'
 import GenericContainer from '@/pages/GenericContainer'
+import NewProperty from '@/pages/properties/NewProperty'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
           component: SinglePropertyTab
         }]
       }]
+    },
+    {
+      path: '/properties/new',
+      name: 'newProperty',
+      component: NewProperty,
     }
 
   ]

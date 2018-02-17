@@ -11,7 +11,8 @@ const state = {
   currentProperty: {
     attributes: {}
   },
-  fieldOptions: {}
+  fieldOptions: {},
+  newProperty: {}
 }
 
 // getters
@@ -82,18 +83,15 @@ const actions = {
       commit('setCurrentProperty', { result: response.data })
     })
   },
-  addProperty({ commit, state }) {
-    if (!state.newProperty) {
-      // do not add empty properties
-      return
-    }
-    const property = {
-      title: state.newProperty,
-      completed: false,
-      // id: randomId()
-    }
-    axios.post('/properties', property).then(_ => {
-      commit('setNewProperty', property)
+  createProperty({ commit, state }) {
+    // if (!state.newProperty) {
+    //   return
+    // }
+    let apiUrl = '/api/v2/properties/'
+    axios.post(apiUrl, {
+      new_property: state.pendingChanges
+    }).then(result => {
+      // commit('setNewProperty', property)
     })
   },
   // Below will compare changes made to a field's value in a form
@@ -125,8 +123,8 @@ const mutations = {
   setHasPendingChanges: (state, result) => {
     state.hasPendingChanges = result
   },
-  // setNewProperty(state, todoObject) {
-  //   state.todos.push(todoObject)
+  // setNewProperty(state, propertyObject) {
+  //   state.properties.push(propertyObject)
   // },
   clearNewProperty(state) {
     state.newProperty = ''
