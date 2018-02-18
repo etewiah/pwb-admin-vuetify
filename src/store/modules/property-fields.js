@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // initial state
 const state = {
-  features: [],
+  // features: [],
   // pendingChanges: {},
   // hasPendingChanges: false,
   propertyFieldTranslations: {}
@@ -23,6 +23,19 @@ const actions = {
       console.log(err)
     })
   },
+  // updatePendingTranslationChanges({ commit, state }, fieldDetails) {
+  //   debugger
+  //   // I store features on the server as a list of keys
+  //   let fieldHasChanged = fieldDetails.newValue !== fieldDetails.originalValue
+  //   if (fieldHasChanged) {
+  //     state.pendingChanges[fieldDetails.fieldName] = fieldDetails.newValue
+  //     // pendingChange[fieldDetails.fieldName] = fieldDetails.newValue
+  //     // state.pendingChanges.push(pendingChange)
+  //   } else {
+  //     delete state.pendingChanges[fieldDetails.fieldName]
+  //   }
+  //   commit('setHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
+  // },
 }
 
 // mutations
