@@ -15,15 +15,6 @@ const getters = {}
 const actions = {
   updatePropertyFeatures({ commit, state }) {
     let apiUrl = '/api/v2/properties/' + state.currentPropertyId + '/update_features'
-    // if (state.hasPendingChanges) {
-    //   // go through the 
-    //   Object.keys(state.pendingChanges).forEach(function(pendingChangeKey) {
-    //     state.features.push(pendingChangeKey)
-    //     // state.currentProperty[pendingChangeKey] = state.pendingChanges[pendingChangeKey]
-    //   })
-    // }
-    // debugger
-
     // console.log(axios.defaults.headers.common)
     axios.put(apiUrl, {
       features: state.pendingChanges
@@ -33,8 +24,6 @@ const actions = {
         'Accept': 'application/vnd.api+json'
       }
     }).then(response => {
-      // debugger
-      // commit('setPropertyFeatures', { result: response.data.features_list })
       commit('setHasPendingChanges', false)
     })
   },

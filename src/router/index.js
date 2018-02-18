@@ -59,7 +59,7 @@ export default new Router({
       component: GenericContainer,
       children: [{
         path: '',
-        name: 'propertiesList',
+        // name: 'propertiesList',
         component: PropertiesList
       }, {
         path: ':labelName',

@@ -11,31 +11,11 @@ export default {
   components: {
     SwitchField
   },
-  props: ["translation", "fieldDetails", "fieldOptions"],
+  props: ["translation"],
   data() {
     return {}
   },
   computed: {
-    selectItems: function() {
-      let untranslated = this.fieldOptions[this.fieldDetails.optionsKey] || null
-      let selectItems = [{ name: "", value: "" }]
-      let i18n = this.$i18n
-      let fieldName = this.fieldDetails.fieldName
-      if (untranslated) {
-        untranslated.forEach(function(optionKey) {
-          let name = i18n.t(optionKey)
-          if (fieldName === "currency") {
-            optionKey = optionKey.toUpperCase()
-          }
-          selectItems.push({
-            name: name,
-            value: optionKey
-          })
-        })
-        // debugger
-      }
-      return selectItems
-    },
     currentField: {
       get() {
         return _.clone(this.translation.i18n_value)

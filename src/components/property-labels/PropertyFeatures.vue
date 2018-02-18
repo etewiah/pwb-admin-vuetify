@@ -13,6 +13,7 @@
 </template>
 <script>
 import LabelTranslations from '@/components/property-labels/LabelTranslations'
+import _ from 'lodash'
 // import { required } from 'vuelidate/lib/validators'
 export default {
   components: {
@@ -24,16 +25,16 @@ export default {
   },
   computed: {
     propertyFieldTranslations: function() {
-      // debugger
-      return this.$store.state.propertyFieldsStore.propertyFieldTranslations
+      let unsortedTranslations = this.$store.state.propertyFieldsStore.propertyFieldTranslations
+      return _.sortBy(unsortedTranslations, "title")
+      // return this.$store.state.propertyFieldsStore.propertyFieldTranslations
     },
   },
   mounted: function() {
     let fieldNames = "extras"
     this.$store.dispatch('loadFieldTranslations', fieldNames)
   },
-  methods: {
-  }
+  methods: {}
 }
 
 </script>

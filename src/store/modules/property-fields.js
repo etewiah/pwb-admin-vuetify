@@ -1,4 +1,5 @@
 import axios from 'axios'
+import i18n from '@/i18n'
 
 // initial state
 const state = {
@@ -13,41 +14,39 @@ const getters = {}
 
 // actions
 const actions = {
+  updateFieldTranslations({ commit, state }, pendingChanges) {
+    let apiUrl = '/api/v2/translations/update'
+    axios.put(apiUrl, pendingChanges, {
+      headers: {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json'
+      }
+    }).then(response => {
+      debugger
+      commit('setHasPendingChanges', false)
+    })
+  },
   loadFieldTranslations({ commit, state }) {
     let apiUrl = '/api/v2/translations/batch/extras/all'
     axios.get(apiUrl, {
 
     }).then((response) => {
-      commit('setPropertyFieldTranslations', { result: response.data.translations })
+      commit('setPropertyFieldTranslations', { results: response.data.translations })
     }, (err) => {
       console.log(err)
     })
   },
-  // updatePendingTranslationChanges({ commit, state }, fieldDetails) {
-  //   debugger
-  //   // I store features on the server as a list of keys
-  //   let fieldHasChanged = fieldDetails.newValue !== fieldDetails.originalValue
-  //   if (fieldHasChanged) {
-  //     state.pendingChanges[fieldDetails.fieldName] = fieldDetails.newValue
-  //     // pendingChange[fieldDetails.fieldName] = fieldDetails.newValue
-  //     // state.pendingChanges.push(pendingChange)
-  //   } else {
-  //     delete state.pendingChanges[fieldDetails.fieldName]
-  //   }
-  //   commit('setHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
-  // },
 }
 
 // mutations
 const mutations = {
-  // setHasPendingChanges: (state, result) => {
-  //   state.hasPendingChanges = result
-  //   if (!result) {
-  //     state.pendingChanges = {}
-  //   }
-  // },
-  setPropertyFieldTranslations: (state, { result }) => {
-    state.propertyFieldTranslations = result
+  setPropertyFieldTranslations: (state, { results }) => {
+    if (results) {
+      results.forEach(function(result) {
+        result.title = i18n.t(result.key)
+      })
+    }
+    state.propertyFieldTranslations = results
   },
 }
 

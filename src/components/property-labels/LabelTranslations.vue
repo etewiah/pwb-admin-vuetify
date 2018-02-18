@@ -10,7 +10,7 @@
                 <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
               </v-layout>
               <v-layout wrap row>
-                <template v-for="(translation) in resourceModel">
+                <template v-for="(translation) in resourceModel.translations">
                   <TranslationField v-bind:translation="translation" v-on:translationChanged="updatePendingChanges"></TranslationField>
                   <div class="form-group">
                     <!--                     <v-text-field name="translation" @change="onPendingChange" :label="$t(translation.locale)" v-model="translation.i18n_value"></v-text-field>
@@ -33,7 +33,6 @@
 import TranslationField from '@/components/form-fields/TranslationField'
 import FormSubmitter from '@/components/form-fields/FormSubmitter'
 // import { required, minLength } from 'vuelidate/lib/validators'
-// import _ from 'lodash'
 export default {
   components: {
     TranslationField,
@@ -69,7 +68,7 @@ export default {
     //   }
     // },
     translationTitle: function() {
-      return this.resourceModel[0].i18n_value
+      return this.resourceModel.title
     },
   },
   // mounted: function() {
@@ -85,14 +84,11 @@ export default {
   // },
   methods: {
     onUpdateTranslation(newValue) {
-      // debugger
-      // if (newValue) {
-      //   this.fieldLabel = "Yes"
-      // } else {
-      //   this.fieldLabel = "No"
-      // }
-      // this.fieldDetails.newValue = newValue
-      // this.$store.dispatch('updatePendingPropertyFeatureChanges', this.fieldDetails, newValue)
+      let pendingTranslationChanges = {
+        i18nKey: this.resourceModel.key,
+        changes: this.pendingChanges
+      }
+      this.$store.dispatch('updateFieldTranslations', pendingTranslationChanges)
     },
     updatePendingChanges(translation, newValue) {
       if (translation.i18n_value !== newValue) {
