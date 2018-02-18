@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import propertiesStore from './modules/properties'
 import propertyFeaturesStore from './modules/property-features'
+import propertyFieldsStore from './modules/property-fields'
 import navigationStore from './modules/navigation'
 // import pagesStore from './modules/pages'
 Vue.use(Vuex)
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
     propertiesStore,
     navigationStore,
     propertyFeaturesStore,
+    propertyFieldsStore,
     // pagesStore
   },
   state: {
