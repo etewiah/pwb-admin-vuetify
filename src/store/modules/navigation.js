@@ -116,8 +116,9 @@ const state = {
     componentName: "GeneralPropertyDetails",
   }],
   propertyLabelTabs: [{
-      tabValue: "extras",
-      tabTitleKey: "translationsSections.extras"
+      tabValue: "features",
+      tabTitleKey: "translationsSections.extras",
+      componentName: "PropertyFeatures"
     }, {
       tabValue: "property-types",
       tabTitleKey: "translationsSections.propertyTypes"
