@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import PropertiesList from '@/pages/properties/PropertiesList'
 import SingleProperty from '@/pages/properties/SingleProperty'
+import PropertyLabels from '@/pages/properties/PropertyLabels'
 import SinglePropertyTab from '@/pages/properties/SinglePropertyTab'
 import GenericContainer from '@/pages/GenericContainer'
 import NewProperty from '@/pages/properties/NewProperty'
@@ -53,7 +54,20 @@ export default new Router({
       path: '/properties/new',
       name: 'newProperty',
       component: NewProperty,
-    }
+    }, {
+      path: '/properties/labels',
+      component: GenericContainer,
+      children: [{
+        path: '',
+        name: 'propertiesList',
+        component: PropertiesList
+      }, {
+        path: ':labelName',
+        name: 'propertyLabels',
+        component: PropertyLabels,
+        children: []
+      }]
+    },
 
   ]
 })

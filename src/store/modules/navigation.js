@@ -3,19 +3,19 @@
 // initial state
 const state = {
   mainNavItems: [
-  // {
-  //     icon: "fa fa-home",
-  //     tabTitleKey: "adminSections.start",
-  //     tabRoute: "admin.setup"
-  //     // tabRoute: "admin.inicio"
-  //   }, {
-  //     tabTitleKey: "adminSections.properties",
-  //     tabRoute: "admin.propiedades",
-  //     icon: 'domain',
-  //     text: 'Properties',
-  //     href: 'properties',
-  //     router: true,
-  //   },
+    // {
+    //     icon: "fa fa-home",
+    //     tabTitleKey: "adminSections.start",
+    //     tabRoute: "admin.setup"
+    //     // tabRoute: "admin.inicio"
+    //   }, {
+    //     tabTitleKey: "adminSections.properties",
+    //     tabRoute: "admin.propiedades",
+    //     icon: 'domain',
+    //     text: 'Properties',
+    //     href: 'properties',
+    //     router: true,
+    //   },
     {
       icon: 'domain',
       title: 'Properties',
@@ -115,6 +115,27 @@ const state = {
     tabTitleKey: "propertySections.photos",
     componentName: "GeneralPropertyDetails",
   }],
+  propertyLabelTabs: [{
+      tabValue: "extras",
+      tabTitleKey: "translationsSections.extras"
+    }, {
+      tabValue: "property-types",
+      tabTitleKey: "translationsSections.propertyTypes"
+      // }, {
+      //   tabValue: "property-origins",
+      //   tabTitleKey: "translationsSections.propertyOrigins"
+    }, {
+      tabValue: "property-states",
+      tabTitleKey: "translationsSections.propertyStates"
+    }, {
+      tabValue: "property-labels",
+      tabTitleKey: "translationsSections.propertyLabels"
+    }
+    // ,{
+    //   tabValue: "provinces",
+    //   tabTitleKey: "translationsSections.provinces"
+    // }
+  ],
 }
 
 // getters
