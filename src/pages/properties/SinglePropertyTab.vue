@@ -1,10 +1,8 @@
 <template>
-  <v-container>
-    <!-- basic -->
-    <keep-alive>
-      <component :is="propertyDetailsComponent" v-bind:currentProperty="currentProperty"></component>
-    </keep-alive>
-  </v-container>
+  <!-- basic -->
+  <keep-alive>
+    <component :is="propertyDetailsComponent" v-bind:currentProperty="currentProperty"></component>
+  </keep-alive>
 </template>
 <script>
 import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'

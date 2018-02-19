@@ -83,6 +83,21 @@ const actions = {
       commit('setCurrentProperty', { result: response.data })
     })
   },
+  updatePropertyTexts({ commit, state }, propertyTextChanges) {
+    let apiUrl = '/api/v2/properties/' + state.currentProperty.id
+    Object.keys(propertyTextChanges).forEach(function(pendingChangeKey) {
+      state.currentProperty[pendingChangeKey] = propertyTextChanges[pendingChangeKey]
+    })
+    axios.put(apiUrl, {
+      property: state.currentProperty
+    }, {
+      headers: {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json'
+      }
+    }).then(response => {
+    })
+  },
   createProperty({ commit, state }) {
     // if (!state.newProperty) {
     //   return

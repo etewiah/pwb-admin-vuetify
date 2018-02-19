@@ -22,19 +22,10 @@ export default {
     }
   },
   computed: {
-    // featureFields: function() {
-    //   let featureFields = []
-    //   return featureFields
-    // },
   },
   mounted: function() {
-    // let fieldNames = "extras"
-    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
-    // onUpdateProperty() {
-    //   this.$store.dispatch('updatePropertyFeatures')
-    // },
   }
 }
 
