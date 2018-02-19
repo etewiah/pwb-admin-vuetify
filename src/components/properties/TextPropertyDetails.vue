@@ -1,7 +1,7 @@
 <template>
-  <v-layout row>
-    <template v-for="(locale) in currentLocales">
-      <v-flex xs12 sm6 class="mr-4">
+  <v-layout wrap row>
+    <template v-for="(locale) in supportedLocales">
+      <v-flex xs12 sm6 class="pr-3 pt-4">
         <PropertyTextField v-bind:locale="locale" v-bind:currentProperty="currentProperty"></PropertyTextField>
       </v-flex>
     </template>
@@ -18,15 +18,16 @@ export default {
   watch: {},
   data() {
     return {
-      currentLocales: ["en", "es"]
+      // supportedLocales: ["en", "es"]
     }
   },
   computed: {
+    supportedLocales: function() {
+      return this.$store.state.supportedLocales
+    }
   },
-  mounted: function() {
-  },
-  methods: {
-  }
+  mounted: function() {},
+  methods: {}
 }
 
 </script>

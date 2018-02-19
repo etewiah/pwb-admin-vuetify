@@ -20,6 +20,7 @@ const store = new Vuex.Store({
     newProperty: "",
     pages: [],
     currencies: [],
+    supportedLocales: [],
   },
   actions: {
     loadSetupInfo: function({ commit }) {
@@ -36,6 +37,7 @@ const store = new Vuex.Store({
     setSiteData: (state, { result }) => {
       state.pages = result.website.admin_page_links
       state.currencies = result.setup.currencyFieldKeys
+      state.supportedLocales = result.website.supported_locales
     }
   },
   getters: {

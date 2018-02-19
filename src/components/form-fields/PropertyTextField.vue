@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title primary-title>
       <div>
-        <h4 class="headline mb-0">{{ $t(locale) }}</h4>
+        <h4 class="headline mb-0">{{ $t(shortLocale) }}</h4>
       </div>
     </v-card-title>
     <v-card-text>
@@ -42,14 +42,14 @@ export default {
     }
   },
   computed: {
-    // hasPendingChanges: function() {
-    //   return this.$store.state.propertiesStore.hasPendingChanges
-    // },
+    shortLocale: function() {
+      return this.locale.substring(0, 2)
+    },
     localeTitleFieldName: function() {
-      return "title_" + this.locale
+      return "title_" + this.shortLocale
     },
     localeDescriptionFieldName: function() {
-      return "description_" + this.locale
+      return "description_" + this.shortLocale
     },
     localeTitleField: {
       get() {
