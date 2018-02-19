@@ -1,5 +1,6 @@
 import axios from 'axios'
 import i18n from '@/i18n'
+import _ from 'lodash'
 
 // initial state
 const state = {
@@ -22,8 +23,7 @@ const actions = {
         'Accept': 'application/vnd.api+json'
       }
     }).then(response => {
-      debugger
-      commit('setHasPendingChanges', false)
+      // commit('updatePropertyFieldTranslation', { result: response.data })
     })
   },
   loadFieldTranslations({ commit, state }) {
@@ -40,6 +40,10 @@ const actions = {
 
 // mutations
 const mutations = {
+  // updatePropertyFieldTranslation: (state, { result }) => {
+  //   let target = _.find(state.propertyFieldTranslations, "key", result[0].i18n_key)
+  //   console.log(target)
+  // },
   setPropertyFieldTranslations: (state, { results }) => {
     if (results) {
       results.forEach(function(result) {

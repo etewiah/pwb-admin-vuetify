@@ -3,19 +3,15 @@
     <v-card>
       <v-card-title primary-title>
         <div>
-          <h3 class="headline mb-0">{{ translationTitle }}</h3>
+          <h3 class="headline mb-0">{{ resourceModel.title }}</h3>
           <div>
             <form @submit.prevent="onUpdateTranslation">
               <v-layout row>
                 <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
               </v-layout>
               <v-layout wrap row>
-                <template v-for="(translation) in resourceModel.translations">
+                <template v-for="(translation) in orderedTranslations">
                   <TranslationField v-bind:translation="translation" v-on:translationChanged="updatePendingChanges"></TranslationField>
-                  <div class="form-group">
-                    <!--                     <v-text-field name="translation" @change="onPendingChange" :label="$t(translation.locale)" v-model="translation.i18n_value"></v-text-field>
- -->
-                  </div>
                 </template>
               </v-layout>
             </form>
@@ -23,8 +19,7 @@
         </div>
       </v-card-title>
       <v-card-actions>
-        <v-btn flat color="orange">Share</v-btn>
-        <v-btn flat color="orange">Explore</v-btn>
+        <!-- <v-btn flat color="orange">Share</v-btn> -->
       </v-card-actions>
     </v-card>
   </div>
@@ -32,6 +27,8 @@
 <script>
 import TranslationField from '@/components/form-fields/TranslationField'
 import FormSubmitter from '@/components/form-fields/FormSubmitter'
+import _ from 'lodash'
+
 // import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   components: {
@@ -43,32 +40,13 @@ export default {
     return {
       fieldValue: false,
       fieldLabel: "No",
-      // duplicatedValues: [],
       pendingChanges: {},
       hasPendingChanges: false,
     }
   },
   computed: {
-    // dupValues: {
-    //   get() {
-    //     let dupValues = []
-    //     this.resourceModel.forEach(function(localeTranslation) {
-    //       let i18nValue = _.cloneDeep(localeTranslation.i18n_value)
-    //       dupValues.push({
-    //         locale: localeTranslation.locale,
-    //         i18n_value: i18nValue
-    //       })
-    //     })
-    //     return dupValues
-    //   },
-    //   // // setter
-    //   set(newValue) {
-    //     this.fieldDetails.newValue = newValue
-    //     this.$store.dispatch('updatePendingChanges', this.fieldDetails, newValue)
-    //   }
-    // },
-    translationTitle: function() {
-      return this.resourceModel.title
+    orderedTranslations: function() {
+      return _.sortBy(this.resourceModel.translations, "locale")
     },
   },
   // mounted: function() {
@@ -89,6 +67,8 @@ export default {
         changes: this.pendingChanges
       }
       this.$store.dispatch('updateFieldTranslations', pendingTranslationChanges)
+      // TODO: Wait for reply from store before reseting pendingChanges
+      this.pendingChanges = {}
     },
     updatePendingChanges(translation, newValue) {
       if (translation.i18n_value !== newValue) {

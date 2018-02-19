@@ -27,7 +27,6 @@ export default {
     propertyFieldTranslations: function() {
       let unsortedTranslations = this.$store.state.propertyFieldsStore.propertyFieldTranslations
       return _.sortBy(unsortedTranslations, "title")
-      // return this.$store.state.propertyFieldsStore.propertyFieldTranslations
     },
   },
   mounted: function() {

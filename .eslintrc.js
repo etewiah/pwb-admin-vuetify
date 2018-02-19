@@ -34,6 +34,7 @@ module.exports = {
     "comma-dangle": 0,
     "padded-blocks": 0,
     "indent": 0,
-    "no-trailing-spaces": 0
+    "no-trailing-spaces": 0,
+    "no-unused-vars": 0
   }
 }
