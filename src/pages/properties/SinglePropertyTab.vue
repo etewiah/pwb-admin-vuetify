@@ -2,13 +2,13 @@
   <v-container>
     <!-- basic -->
     <keep-alive>
-      <component :is="propertyDetailsComponent" v-bind:property="currentProperty" v-bind:currentProperty="currentProperty"></component>
+      <component :is="propertyDetailsComponent" v-bind:currentProperty="currentProperty"></component>
     </keep-alive>
   </v-container>
 </template>
 <script>
 import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
-// import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
+import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
 import FeaturesPropertyDetails from '@/components/properties/FeaturesPropertyDetails'
 import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
 export default {
@@ -17,7 +17,7 @@ export default {
   },
   components: {
     GeneralPropertyDetails,
-    // TextPropertyDetails,
+    TextPropertyDetails,
     FeaturesPropertyDetails,
     SalePropertyDetails,
   },
