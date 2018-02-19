@@ -30,9 +30,9 @@ export default new Router({
         component: PropertiesList
       }, {
         path: ':id',
-        name: 'singleProperty',
         component: SingleProperty,
         children: [{
+          name: 'singleProperty',
           path: '',
           redirect: to => {
             const { params } = to
@@ -59,11 +59,14 @@ export default new Router({
       component: GenericContainer,
       children: [{
         path: '',
-        // name: 'propertiesList',
-        component: PropertiesList
+        name: 'defaultPropertyLabel',
+        redirect: to => {
+          const { params } = to
+          return { name: 'propertyLabels', params: { labelName: 'features' } }
+        }
       }, {
-        path: ':labelName',
         name: 'propertyLabels',
+        path: ':labelName',
         component: PropertyLabels,
         children: []
       }]

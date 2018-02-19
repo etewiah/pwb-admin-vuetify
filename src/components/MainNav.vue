@@ -8,7 +8,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }} {{ $t(item.tabTitleKey) }}
+              <v-list-tile-title>{{ $t(item.tabTitleKey) }}
               </v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>

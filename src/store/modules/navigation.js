@@ -28,6 +28,11 @@ const state = {
         router: true
       }, {
         icon: 'domain',
+        text: 'Labels',
+        href: 'defaultPropertyLabel',
+        router: true
+      }, {
+        icon: 'domain',
         text: 'New Property',
         href: 'newProperty',
         router: true
@@ -99,11 +104,11 @@ const state = {
     tabTitleKey: "propertySections.text",
     componentName: "TextPropertyDetails",
   }, {
-    tabValue: "venta",
+    tabValue: "sale-rental",
     tabTitleKey: "propertySections.sale",
     componentName: "SalePropertyDetails",
   }, {
-    tabValue: "situacion",
+    tabValue: "location",
     tabTitleKey: "propertySections.location",
     componentName: "GeneralPropertyDetails",
   }, {
@@ -111,7 +116,7 @@ const state = {
     tabTitleKey: "propertySections.extras",
     componentName: "FeaturesPropertyDetails",
   }, {
-    tabValue: "fotos",
+    tabValue: "photos",
     tabTitleKey: "propertySections.photos",
     componentName: "GeneralPropertyDetails",
   }],
