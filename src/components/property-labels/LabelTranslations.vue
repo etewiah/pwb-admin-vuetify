@@ -69,6 +69,7 @@ export default {
       this.$store.dispatch('updateFieldTranslations', pendingTranslationChanges)
       // TODO: Wait for reply from store before reseting pendingChanges
       this.pendingChanges = {}
+      this.hasPendingChanges = false
     },
     updatePendingChanges(translation, newValue) {
       if (translation.i18n_value !== newValue) {

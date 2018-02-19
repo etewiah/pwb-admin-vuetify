@@ -121,16 +121,19 @@ const state = {
       componentName: "PropertyFeatures"
     }, {
       tabValue: "property-types",
-      tabTitleKey: "translationsSections.propertyTypes"
+      tabTitleKey: "translationsSections.propertyTypes",
+      componentName: "PropertyTypes"
       // }, {
       //   tabValue: "property-origins",
       //   tabTitleKey: "translationsSections.propertyOrigins"
     }, {
       tabValue: "property-states",
-      tabTitleKey: "translationsSections.propertyStates"
-    }, {
-      tabValue: "property-labels",
-      tabTitleKey: "translationsSections.propertyLabels"
+      tabTitleKey: "translationsSections.propertyStates",
+      componentName: "PropertyStates"
+    // }, {
+    //   tabValue: "transaction-status",
+    //   tabTitleKey: "translationsSections.propertyLabels",
+    //   componentName: "TransactionStatus"
     }
     // ,{
     //   tabValue: "provinces",

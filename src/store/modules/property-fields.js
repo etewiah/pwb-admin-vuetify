@@ -26,8 +26,8 @@ const actions = {
       // commit('updatePropertyFieldTranslation', { result: response.data })
     })
   },
-  loadFieldTranslations({ commit, state }) {
-    let apiUrl = '/api/v2/translations/batch/extras/all'
+  loadFieldTranslations({ commit, state }, fieldNames) {
+    let apiUrl = '/api/v2/translations/batch/' + fieldNames + '/all'
     axios.get(apiUrl, {
 
     }).then((response) => {
