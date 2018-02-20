@@ -5,7 +5,7 @@ import propertiesStore from './modules/properties'
 import propertyFeaturesStore from './modules/property-features'
 import propertyFieldsStore from './modules/property-fields'
 import navigationStore from './modules/navigation'
-// import pagesStore from './modules/pages'
+import pagesStore from './modules/pages'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     navigationStore,
     propertyFeaturesStore,
     propertyFieldsStore,
-    // pagesStore
+    pagesStore
   },
   state: {
     newProperty: "",

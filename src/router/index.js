@@ -7,6 +7,7 @@ import PropertyLabels from '@/pages/properties/PropertyLabels'
 import SinglePropertyTab from '@/pages/properties/SinglePropertyTab'
 import GenericContainer from '@/pages/GenericContainer'
 import NewProperty from '@/pages/properties/NewProperty'
+import SitePageDetails from '@/pages/site-pages/SitePageDetails'
 
 Vue.use(Router)
 
@@ -17,6 +18,27 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    }, {
+      path: '/site-pages/:pageName',
+      // name: 'site-page',
+      component: GenericContainer,
+      // redirect: { name: 'single-page-tab' },
+      children: [{
+          path: '',
+          name: 'sitePageDetailsDefault',
+          component: SitePageDetails,
+        },
+        {
+          path: ':tabName',
+          name: 'site-page-details',
+          component: SitePageDetails,
+          // children: [{
+          //   name: 'single-page-tab',
+          //   path: ':tabName',
+          //   component: SitePageDetails
+          // }]
+        }
+      ]
     }, {
       path: '/properties',
       name: 'properties',

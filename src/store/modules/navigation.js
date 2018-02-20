@@ -51,16 +51,16 @@ const state = {
     //     tabTitleKey: "webContentSections.footer",
     //     tabRoute: "admin.website.details.footer"
     //   }]
-    // }, {
-    //   icon: "pages",
-    //   tabTitleKey: "site pages",
-    //   // tabRoute: "admin.pages",
-    //   // subMenuItems: [],
-    //   // title: 'Attractions',
-    //   isGroupHeader: true,
-    //   childItems: []
+    {
+      icon: "pages",
+      tabTitleKey: "adminSections.pages",
+      // tabRoute: "admin.pages",
+      // subMenuItems: [],
+      // title: 'Attractions',
+      isGroupHeader: true,
+      childItems: []
 
-    // }, {
+    },
     //   icon: "fa fa-exchange",
     //   tabTitleKey: "adminSections.import",
     //   tabRoute: "admin.io"
@@ -135,10 +135,10 @@ const state = {
       tabValue: "property-states",
       tabTitleKey: "translationsSections.propertyStates",
       componentName: "PropertyStates"
-    // }, {
-    //   tabValue: "transaction-status",
-    //   tabTitleKey: "translationsSections.propertyLabels",
-    //   componentName: "TransactionStatus"
+      // }, {
+      //   tabValue: "transaction-status",
+      //   tabTitleKey: "translationsSections.propertyLabels",
+      //   componentName: "TransactionStatus"
     }
     // ,{
     //   tabValue: "provinces",
