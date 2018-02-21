@@ -10,7 +10,7 @@
         <v-card-text>
           <form @submit.prevent="onUpdatePageSettings">
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
             <v-layout v-for="(field, index) in pageTitleFields" row>
               <v-flex xs12 sm12 offset-sm0>
@@ -64,6 +64,7 @@ export default {
   },
   computed: {
     // hasPendingChanges() {
+    //  This does not update when pendingChanges get updated
     //   let pendingChanges = this.pendingChanges
     //   let pcl = Object.keys(pendingChanges).length
     //   return pcl > 0
@@ -98,6 +99,16 @@ export default {
     // this.$store.dispatch('loadProperty', this.$route.params["id"])
   },
   methods: {
+    changesCanceled() {
+      let that = this
+      Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
+        let changedTitleField = _.find(that.pageTitleFields, "fieldName", pendingChangeKey)
+        changedTitleField.fieldValue = _.cloneDeep(that.currentPage[pendingChangeKey])
+        // that.currentPage[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
+      })
+      this.pendingChanges = {}
+      this.hasPendingChanges = false
+    },
     onTitleChange(fieldName, newValue) {
       if (this.currentPage[fieldName] !== newValue) {
         this.pendingChanges[fieldName] = newValue
@@ -112,7 +123,7 @@ export default {
         that.currentPage[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
       })
       this.$store.dispatch('updatePage')
-
+      // TODO: ensure above is successfull before calling below:
       this.pendingChanges = {}
       this.hasPendingChanges = false
     }
