@@ -10,7 +10,7 @@
                 <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
               </v-layout>
               <v-layout wrap row>
-                <template v-for="(translation) in orderedTranslations">
+                <template v-for="(translation) in orderedTranslationsCopy">
                   <v-flex xs12 sm12 offset-sm0>
                     <v-text-field v-on:keyup="updatePendingChanges(translation, translation.i18n_value)" name="translation" :label="$t(translation.locale)" v-model="translation.i18n_value"></v-text-field>
                   </v-flex>
@@ -30,14 +30,14 @@
   </div>
 </template>
 <script>
-import TranslationField from '@/components/form-fields/TranslationField'
+// import TranslationField from '@/components/form-fields/TranslationField'
 import FormSubmitter from '@/components/form-fields/FormSubmitter'
 import _ from 'lodash'
 
 // import { required, minLength } from 'vuelidate/lib/validators'
 export default {
   components: {
-    TranslationField,
+    // TranslationField,
     FormSubmitter
   },
   props: ["resourceModel"],
@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    orderedTranslations: function() {
+    orderedTranslationsCopy: function() {
       let translations = []
       _.sortBy(this.resourceModel.translations, "locale").forEach(function(translation) {
         let clonedTr = _.cloneDeep(translation)
@@ -81,7 +81,7 @@ export default {
       let that = this
       Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
         let originalTr = _.find(that.resourceModel.translations, { locale: pendingChangeKey })
-        let newTr = _.find(that.orderedTranslations, { locale: pendingChangeKey })
+        let newTr = _.find(that.orderedTranslationsCopy, { locale: pendingChangeKey })
         newTr.i18n_value = originalTr.i18n_value
       })
       this.pendingChanges = {}
