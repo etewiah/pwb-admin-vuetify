@@ -29,10 +29,10 @@ export default {
       return _.sortBy(unsortedTranslations, "title")
     },
   },
-  mounted: function() {
-    let fieldNames = "property-types"
-    this.$store.dispatch('loadFieldTranslations', fieldNames)
-  },
+  // mounted: function() {
+  //   let fieldNames = "property-types"
+  //   this.$store.dispatch('loadFieldTranslations', fieldNames)
+  // },
   methods: {}
 }
 

@@ -29,11 +29,9 @@ export default {
       return _.sortBy(unsortedTranslations, "title")
     },
   },
-  mounted: function() {
-    let fieldNames = "extras"
-    this.$store.dispatch('loadFieldTranslations', fieldNames)
-  },
-  methods: {}
+  // mounted: function() {
+
+  // },
 }
 
 </script>
