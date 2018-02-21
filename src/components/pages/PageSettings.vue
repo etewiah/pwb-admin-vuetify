@@ -18,7 +18,7 @@
               </v-flex>
             </v-layout>
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
           </form>
         </v-card-text>
@@ -102,7 +102,9 @@ export default {
     changesCanceled() {
       let that = this
       Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
-        let changedTitleField = _.find(that.pageTitleFields, "fieldName", pendingChangeKey)
+        // let changedTitleField = _.find(that.pageTitleFields, "fieldName", pendingChangeKey)
+        // above method of finding with lowdash
+        let changedTitleField = _.find(that.pageTitleFields, {fieldName: pendingChangeKey})
         changedTitleField.fieldValue = _.cloneDeep(that.currentPage[pendingChangeKey])
         // that.currentPage[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
       })
