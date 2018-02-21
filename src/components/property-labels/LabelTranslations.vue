@@ -7,12 +7,17 @@
           <div>
             <form @submit.prevent="onUpdateTranslation">
               <v-layout row>
-                <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+                <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
               </v-layout>
               <v-layout wrap row>
                 <template v-for="(translation) in orderedTranslations">
-                  <TranslationField v-bind:translation="translation" v-on:translationChanged="updatePendingChanges"></TranslationField>
+                  <v-flex xs12 sm12 offset-sm0>
+                    <v-text-field v-on:keyup="updatePendingChanges(translation, translation.i18n_value)" name="translation" :label="$t(translation.locale)" v-model="translation.i18n_value"></v-text-field>
+                  </v-flex>
                 </template>
+              </v-layout>
+              <v-layout row>
+                <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
               </v-layout>
             </form>
           </div>
@@ -38,28 +43,20 @@ export default {
   props: ["resourceModel"],
   data() {
     return {
-      fieldValue: false,
-      fieldLabel: "No",
       pendingChanges: {},
       hasPendingChanges: false,
     }
   },
   computed: {
     orderedTranslations: function() {
-      return _.sortBy(this.resourceModel.translations, "locale")
+      let translations = []
+      _.sortBy(this.resourceModel.translations, "locale").forEach(function(translation) {
+        let clonedTr = _.cloneDeep(translation)
+        translations.push(clonedTr)
+      })
+      return translations
     },
   },
-  // mounted: function() {
-  //   let duplicatedValues = []
-  //   this.resourceModel.forEach(function(localeTranslation) {
-  //     let i18nValue = _.cloneDeep(localeTranslation.i18n_value)
-  //     duplicatedValues.push({
-  //       locale: localeTranslation.locale,
-  //       i18n_value: i18nValue
-  //     })
-  //   })
-  //   this.duplicatedValues = duplicatedValues
-  // },
   methods: {
     onUpdateTranslation(newValue) {
       let pendingTranslationChanges = {
@@ -72,13 +69,24 @@ export default {
       this.hasPendingChanges = false
     },
     updatePendingChanges(translation, newValue) {
-      if (translation.i18n_value !== newValue) {
+      let originalTr = _.find(this.resourceModel.translations, { locale: translation.locale })
+      if (originalTr.i18n_value !== newValue) {
         this.pendingChanges[translation.locale] = newValue
       } else {
         delete this.pendingChanges[translation.locale]
       }
       this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
-    }
+    },
+    changesCanceled() {
+      let that = this
+      Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
+        let originalTr = _.find(that.resourceModel.translations, { locale: pendingChangeKey })
+        let newTr = _.find(that.orderedTranslations, { locale: pendingChangeKey })
+        newTr.i18n_value = originalTr.i18n_value
+      })
+      this.pendingChanges = {}
+      this.hasPendingChanges = false
+    },
   }
 
 }

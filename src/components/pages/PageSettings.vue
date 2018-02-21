@@ -103,7 +103,7 @@ export default {
       let that = this
       Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
         // let changedTitleField = _.find(that.pageTitleFields, "fieldName", pendingChangeKey)
-        // above method of finding with lowdash
+        // above method of finding with lowdash returns the wrong item!!
         let changedTitleField = _.find(that.pageTitleFields, {fieldName: pendingChangeKey})
         changedTitleField.fieldValue = _.cloneDeep(that.currentPage[pendingChangeKey])
         // that.currentPage[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
