@@ -212,8 +212,8 @@ export default {
     }
   },
   mounted: function() {
-    let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
-    this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
+    // let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
+    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
     onUpdateProperty() {

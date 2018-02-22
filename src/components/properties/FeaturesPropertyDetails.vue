@@ -36,11 +36,12 @@ export default {
     }
   },
   computed: {
-    featuresList: function() {
+    featuresList() {
       return this.$store.state.propertyFeaturesStore.propertyFeaturesList
     },
-    featureFields: function() {
+    featureFields() {
       let featureFields = []
+
       if (this.$store.state.propertiesStore.fieldOptions.extras) {
         // For each possible feature a prop could have I create a field
         this.$store.state.propertiesStore.fieldOptions.extras.forEach(function(feature) {
@@ -56,16 +57,16 @@ export default {
       }
       return featureFields
     },
-    cancelPendingChanges: function() {
+    cancelPendingChanges() {
       return this.$store.state.propertyFeaturesStore.cancelPendingChanges
     },
-    hasPendingChanges: function() {
+    hasPendingChanges() {
       return this.$store.state.propertyFeaturesStore.hasPendingChanges
     }
   },
-  mounted: function() {
-    let fieldNames = "extras"
-    this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
+  mounted() {
+    // let fieldNames = "extras"
+    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
     changesCanceled() {

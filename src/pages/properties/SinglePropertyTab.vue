@@ -30,16 +30,23 @@ export default {
       return this.$store.state.propertiesStore.currentProperty
     }
   },
+  watch: {
+    '$route' (to, from) {
+      this.$store.dispatch('loadPropertyFieldOptions', to.params.tabName)
+    }
+  },
   mounted: function() {
-    // this.$store.dispatch('loadProperty', this.$route.params["id"])
+    // let fieldNames = "extras"
+    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
+    this.$store.dispatch('loadPropertyFieldOptions', this.$route.params["tabName"])
   },
   methods: {
-    findBy: function(list, value, column) {
+    findBy(list, value, column) {
       return list.filter(function(item) {
         return item[column].includes(value)
       })
     },
-    orderBy: function(list, order, column) {
+    orderBy(list, order, column) {
       return list.sort(function(a, b) {
         return order * (a[column] - b[column])
       })

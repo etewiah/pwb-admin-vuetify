@@ -24,7 +24,15 @@ const getters = {
 const actions = {
 
 
-  loadPropertyFieldOptions: function({ commit }, fieldNames) {
+  loadPropertyFieldOptions: function({ commit }, tabName) {
+    const fieldNamesSwitch = (opt) => ({
+      "features": "extras",
+      "general": "property-origins, property-types, property-states, property-labels, currencies, area-units",
+    })[opt]
+    let fieldNames = fieldNamesSwitch(tabName) // "Border Collies are good boys and girls."
+    if ((!fieldNames)) {
+      return
+    }
     axios.get('/api/v1/select_values', {
       params: {
         field_names: fieldNames
@@ -96,8 +104,7 @@ const actions = {
         'Content-Type': 'application/vnd.api+json',
         'Accept': 'application/vnd.api+json'
       }
-    }).then(response => {
-    })
+    }).then(response => {})
   },
   createProperty({ commit, state }) {
     // if (!state.newProperty) {

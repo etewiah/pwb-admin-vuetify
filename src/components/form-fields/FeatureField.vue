@@ -22,7 +22,6 @@ export default {
   data() {
     return {
       fieldValue: false,
-      // fieldLabel: "No"
     }
   },
   watch: {
@@ -32,16 +31,11 @@ export default {
         // false to true
         // reset model to its original value
         this.fieldValue = this.fieldDetails.originalValue
-        // if (newValue) {
-        //   this.fieldLabel = "Yes"
-        // } else {
-        //   this.fieldLabel = "No"
-        // }
       }
       // this.model = newValue
       // _.cloneDeep(newValue[this.localeTitleFieldName])
     },
-    resourceModel: function(val) {
+    resourceModel(val) {
       this.fieldDetails.originalValue = false
       if (this.resourceModel) {
         // Features are stored on the server as a list of field keys
@@ -59,7 +53,7 @@ export default {
     },
   },
   computed: {
-    fieldLabel: function() {
+    fieldLabel() {
       if (this.fieldValue) {
         return "Yes"
       } else {
