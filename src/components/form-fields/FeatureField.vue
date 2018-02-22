@@ -18,39 +18,39 @@ export default {
   components: {
     SwitchField
   },
-  props: ["resourceModel", "fieldDetails"],
+  props: ["resourceModel", "fieldDetails", "cancelPendingChanges"],
   data() {
     return {
       fieldValue: false,
-      fieldLabel: "No"
+      // fieldLabel: "No"
     }
   },
-  // mounted: function() {
-  //   this.fieldDetails.originalValue = false
-  //   if (this.resourceModel) {
-  //     debugger
-  //     // Features are stored on the server as a list of field keys
-  //     // The resourceModel represents this list
-  //     // Any feature in that list should have a value of true
-  //     // (ie - the property in question has that feature)
-  //     if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
-  //       // debugger
-  //       this.fieldLabel = "Yes"
-  //       this.fieldDetails.originalValue = true
-  //     }
-  //   }
-  // },
   watch: {
+    'cancelPendingChanges' (newValue, oldValue) {
+      if (oldValue === false) {
+        // when cancelPendingChanges on parent changes from 
+        // false to true
+        // reset model to its original value
+        this.fieldValue = this.fieldDetails.originalValue
+        // if (newValue) {
+        //   this.fieldLabel = "Yes"
+        // } else {
+        //   this.fieldLabel = "No"
+        // }
+      }
+      // this.model = newValue
+      // _.cloneDeep(newValue[this.localeTitleFieldName])
+    },
     resourceModel: function(val) {
       this.fieldDetails.originalValue = false
       if (this.resourceModel) {
         // Features are stored on the server as a list of field keys
         // The resourceModel represents this list
-        // Any feature in that list should have a value of true
+        // Any feature in that list should have a value of true 
+        // here in this FeatureField
         // (ie - the property in question has that feature)
         if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
-          // debugger
-          this.fieldLabel = "Yes"
+          // this.fieldLabel = "Yes"
           this.fieldValue = true
           this.fieldDetails.originalValue = true
         }
@@ -58,7 +58,15 @@ export default {
 
     },
   },
-  // computed: {
+  computed: {
+    fieldLabel: function() {
+      if (this.fieldValue) {
+        return "Yes"
+      } else {
+        return "No"
+      }
+    }
+  },
   //   currentField: {
   //     get() {
   //       this.fieldDetails.originalValue = false
@@ -68,7 +76,6 @@ export default {
   //         // Any feature in that list should have a value of true
   //         // (ie - the property in question has that feature)
   //         if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
-  //           // debugger
   //           this.fieldLabel = "Yes"
   //           this.fieldDetails.originalValue = true
   //         }
@@ -79,11 +86,11 @@ export default {
   // },
   methods: {
     booleanFieldHandler(newValue) {
-      if (newValue) {
-        this.fieldLabel = "Yes"
-      } else {
-        this.fieldLabel = "No"
-      }
+      // if (newValue) {
+      //   this.fieldLabel = "Yes"
+      // } else {
+      //   this.fieldLabel = "No"
+      // }
       this.fieldDetails.newValue = newValue
       this.$store.dispatch('updatePendingPropertyFeatureChanges', this.fieldDetails, newValue)
     }

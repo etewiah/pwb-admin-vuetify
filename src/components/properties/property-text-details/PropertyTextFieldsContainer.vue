@@ -96,7 +96,7 @@ export default {
       this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
     },
     changesCanceled() {
-      let that = this
+      // let that = this
       // Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
       //   let originalTr = that.currentProperty[pendingChangeKey]
       //   if (that.localeTitleFieldName === pendingChangeKey) {
