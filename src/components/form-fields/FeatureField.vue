@@ -32,24 +32,25 @@ export default {
         // reset model to its original value
         this.fieldValue = this.fieldDetails.originalValue
       }
-      // this.model = newValue
-      // _.cloneDeep(newValue[this.localeTitleFieldName])
     },
-    resourceModel(val) {
-      this.fieldDetails.originalValue = false
-      if (this.resourceModel) {
-        // Features are stored on the server as a list of field keys
-        // The resourceModel represents this list
-        // Any feature in that list should have a value of true 
-        // here in this FeatureField
-        // (ie - the property in question has that feature)
-        if (this.resourceModel.includes(this.fieldDetails.fieldName)) {
-          // this.fieldLabel = "Yes"
-          this.fieldValue = true
-          this.fieldDetails.originalValue = true
+    resourceModel: {
+      handler(newValue, oldVal) {
+        this.fieldDetails.originalValue = false
+        if (newValue) {
+          // Features are stored on the server as a list of field keys
+          // The resourceModel represents this list
+          // Any feature in that list should have a value of true 
+          // here in this FeatureField
+          // (ie - the property in question has that feature)
+          if (newValue.includes(this.fieldDetails.fieldName)) {
+            // this.fieldLabel = "Yes"
+            this.fieldValue = true
+            this.fieldDetails.originalValue = true
+          }
         }
-      }
-
+      },
+      // deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -80,11 +81,6 @@ export default {
   // },
   methods: {
     booleanFieldHandler(newValue) {
-      // if (newValue) {
-      //   this.fieldLabel = "Yes"
-      // } else {
-      //   this.fieldLabel = "No"
-      // }
       this.fieldDetails.newValue = newValue
       this.$store.dispatch('updatePendingPropertyFeatureChanges', this.fieldDetails, newValue)
     }
