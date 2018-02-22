@@ -1,11 +1,11 @@
 <template>
-  <v-text-field name="locale" :label="$t('title')" v-model="model" v-on:keyup="updatePendingChanges"></v-text-field>
+  <v-text-field name="locale" :multi-line="multiLine" :label="$t('title')" v-model="model" v-on:keyup="updatePendingChanges"></v-text-field>
 </template>
 <script>
 import _ from 'lodash'
 export default {
   components: {},
-  props: ["resourceModel", "fieldName", "hasPendingChanges"],
+  props: ["resourceModel", "fieldName", "hasPendingChanges", "multiLine"],
   data() {
     return {
       model: ""
@@ -14,6 +14,9 @@ export default {
   watch: {
     'hasPendingChanges' (newValue, oldValue) {
       if (oldValue === true) {
+        // when hasPendingChanges on parent changes from 
+        // true to false
+        // reset model to its original value
         this.model = this.resourceModel[this.fieldName]
       }
       // this.model = newValue
@@ -22,20 +25,19 @@ export default {
     // 'model': 'updateFields'
     resourceModel: {
       handler(newValue, oldVal) {
-        this.model = _.cloneDeep(newValue[this.fieldName])
+        this.model = this.resourceModel[this.fieldName]
+        // this.model = _.cloneDeep(newValue[this.fieldName])
         console.log('resourceModel Changed')
-        // console.log(val)
       },
       deep: true
     },
-    fieldName: {
-      handler(newValue, oldVal) {
-        this.model = _.cloneDeep(this.resourceModel[newValue])
-        console.log('fieldName Changed')
-        // console.log(val)
-      },
-      deep: true
-    },
+    // fieldName: {
+    //   handler(newValue, oldVal) {
+    //     this.model = _.cloneDeep(this.resourceModel[newValue])
+    //     console.log('fieldName Changed')
+    //   },
+    //   deep: true
+    // },
   },
   computed: {
     // model: {
@@ -55,14 +57,7 @@ export default {
       // with :value="model"
       // need to retrieve updated value myself
       let newValue = event.currentTarget.value
-      this.$emit('updatePendingChanges', newValue)
-
-      // if (this.currentProperty[this.localeTitleFieldName] !== newValue) {
-      //   this.pendingChanges[this.localeTitleFieldName] = newValue
-      // } else {
-      //   delete this.pendingChanges[this.localeTitleFieldName]
-      // }
-      // this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
+      this.$emit('updatePendingChanges', newValue, this.fieldName)
     },
   }
 }
