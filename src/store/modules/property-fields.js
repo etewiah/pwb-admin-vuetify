@@ -23,11 +23,11 @@ const actions = {
         'Accept': 'application/vnd.api+json'
       }
     }).then(response => {
-      // commit('updatePropertyFieldTranslation', { result: response.data })
+      commit('updatePropertyFieldTranslation', { result: response.data })
     })
   },
-  loadFieldTranslations({ commit, state }) {
-    let apiUrl = '/api/v2/translations/batch/extras/all'
+  loadFieldTranslations({ commit, state }, fieldNames) {
+    let apiUrl = '/api/v2/translations/batch/' + fieldNames + '/all'
     axios.get(apiUrl, {
 
     }).then((response) => {
@@ -40,10 +40,14 @@ const actions = {
 
 // mutations
 const mutations = {
-  // updatePropertyFieldTranslation: (state, { result }) => {
-  //   let target = _.find(state.propertyFieldTranslations, "key", result[0].i18n_key)
-  //   console.log(target)
-  // },
+  updatePropertyFieldTranslation: (state, { result }) => {
+    // result is a set of locale translations for one of the
+    // array of propertyFieldTranslations
+    // Find that set and update it
+    let target = _.find(state.propertyFieldTranslations, {key: result[0].i18n_key})
+    // console.log(target)
+    target.translations = result
+  },
   setPropertyFieldTranslations: (state, { results }) => {
     if (results) {
       results.forEach(function(result) {

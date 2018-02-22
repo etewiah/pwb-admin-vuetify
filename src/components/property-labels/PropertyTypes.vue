@@ -30,8 +30,10 @@ export default {
     },
   },
   // mounted: function() {
-
+  //   let fieldNames = "property-types"
+  //   this.$store.dispatch('loadFieldTranslations', fieldNames)
   // },
+  methods: {}
 }
 
 </script>

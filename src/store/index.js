@@ -5,7 +5,7 @@ import propertiesStore from './modules/properties'
 import propertyFeaturesStore from './modules/property-features'
 import propertyFieldsStore from './modules/property-fields'
 import navigationStore from './modules/navigation'
-// import pagesStore from './modules/pages'
+import pagesStore from './modules/pages'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -14,12 +14,13 @@ const store = new Vuex.Store({
     navigationStore,
     propertyFeaturesStore,
     propertyFieldsStore,
-    // pagesStore
+    pagesStore
   },
   state: {
     newProperty: "",
     pages: [],
     currencies: [],
+    supportedLocales: [],
   },
   actions: {
     loadSetupInfo: function({ commit }) {
@@ -36,6 +37,7 @@ const store = new Vuex.Store({
     setSiteData: (state, { result }) => {
       state.pages = result.website.admin_page_links
       state.currencies = result.setup.currencyFieldKeys
+      state.supportedLocales = result.website.supported_locales
     }
   },
   getters: {

@@ -8,7 +8,7 @@
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }} {{ $t(item.tabTitleKey) }}
+              <v-list-tile-title>{{ $t(item.tabTitleKey) }}
               </v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action>
@@ -45,29 +45,33 @@
   </v-list>
 </template>
 <script>
+import _ from 'lodash'
 export default {
   computed: {
     mainNavItems() {
       let mainNavItems = this.$store.state.navigationStore.mainNavItems
-      // let adminPageLinks = this.$store.state.pages
-      // if (adminPageLinks.length > 0) {
-      //   // TODO - sort adminPageLinks
-      //   let pagesNav = mainNavItems[4]
-      //   let linkTitleKey = "link_title_en"
+      let adminPageLinks = this.$store.state.pages
+      if (adminPageLinks.length > 0) {
+        // TODO - sort adminPageLinks
+        let pagesNav = _.find(mainNavItems, { icon: "pages" })
+        // _.find(mainNavItems, "icon", "pages")
+        // _.find(mainNavItems, "tabTitleKey", "adminSections.pages")
+        // debugger
+        let linkTitleKey = "link_title_en"
 
-      //   adminPageLinks.forEach(function(page) {
-      //     console.log(page)
-      //     let pageNav = {}
-      //     pageNav.href = "site-page-details-default"
-      //     pageNav.text = page[linkTitleKey]
-      //     pageNav.icon = "domain"
-      //     pageNav.router = true
-      //     pageNav.params = {pageName: page["page_slug"]}
-      //     pagesNav.childItems.push(pageNav)
-      //     // debugger
-      //   })
+        adminPageLinks.forEach(function(page) {
+          console.log(page)
+          let pageNav = {}
+          pageNav.href = "sitePageDetailsDefault"
+          pageNav.text = page[linkTitleKey]
+          pageNav.icon = "domain"
+          pageNav.router = true
+          pageNav.params = {pageName: page["page_slug"]}
+          pagesNav.childItems.push(pageNav)
+          // debugger
+        })
 
-      // }
+      }
       return mainNavItems
 
       //       var pagesNav = leftNavItems.findBy("tabTitleKey", "adminSections.pages");

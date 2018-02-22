@@ -1,14 +1,12 @@
 <template>
-  <v-container>
-    <!-- basic -->
-    <keep-alive>
-      <component :is="propertyDetailsComponent" v-bind:property="currentProperty" v-bind:currentProperty="currentProperty"></component>
-    </keep-alive>
-  </v-container>
+  <!-- basic -->
+  <keep-alive>
+    <component :is="propertyDetailsComponent" v-bind:currentProperty="currentProperty"></component>
+  </keep-alive>
 </template>
 <script>
 import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
-// import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
+import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
 import FeaturesPropertyDetails from '@/components/properties/FeaturesPropertyDetails'
 import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
 export default {
@@ -17,7 +15,7 @@ export default {
   },
   components: {
     GeneralPropertyDetails,
-    // TextPropertyDetails,
+    TextPropertyDetails,
     FeaturesPropertyDetails,
     SalePropertyDetails,
   },
@@ -32,16 +30,23 @@ export default {
       return this.$store.state.propertiesStore.currentProperty
     }
   },
+  watch: {
+    '$route' (to, from) {
+      this.$store.dispatch('loadPropertyFieldOptions', to.params.tabName)
+    }
+  },
   mounted: function() {
-    // this.$store.dispatch('loadProperty', this.$route.params["id"])
+    // let fieldNames = "extras"
+    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
+    this.$store.dispatch('loadPropertyFieldOptions', this.$route.params["tabName"])
   },
   methods: {
-    findBy: function(list, value, column) {
+    findBy(list, value, column) {
       return list.filter(function(item) {
         return item[column].includes(value)
       })
     },
-    orderBy: function(list, order, column) {
+    orderBy(list, order, column) {
       return list.sort(function(a, b) {
         return order * (a[column] - b[column])
       })

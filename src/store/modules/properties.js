@@ -24,7 +24,15 @@ const getters = {
 const actions = {
 
 
-  loadPropertyFieldOptions: function({ commit }, fieldNames) {
+  loadPropertyFieldOptions: function({ commit }, tabName) {
+    const fieldNamesSwitch = (opt) => ({
+      "features": "extras",
+      "general": "property-origins, property-types, property-states, property-labels, currencies, area-units",
+    })[opt]
+    let fieldNames = fieldNamesSwitch(tabName) // "Border Collies are good boys and girls."
+    if ((!fieldNames)) {
+      return
+    }
     axios.get('/api/v1/select_values', {
       params: {
         field_names: fieldNames
@@ -55,7 +63,8 @@ const actions = {
 
     }).then((response) => {
       commit('setFeaturesPropertyId', { result: response.data.id })
-      // commit('setPropertyFeatures', { result: response.data.features_list })
+      commit('setPropertyFeatures', { result: response.data.features_list })
+      // above 2 are in the property-features store
       commit('setCurrentProperty', { result: response.data })
     }, (err) => {
       console.log(err)
@@ -68,7 +77,7 @@ const actions = {
         state.currentProperty[pendingChangeKey] = state.pendingChanges[pendingChangeKey]
       })
     }
-    commit('setHasPendingChanges', false)
+    commit('setPropHasPendingChanges', false)
     state.pendingChanges = {}
 
     // console.log(axios.defaults.headers.common)
@@ -82,6 +91,20 @@ const actions = {
     }).then(response => {
       commit('setCurrentProperty', { result: response.data })
     })
+  },
+  updatePropertyTexts({ commit, state }, propertyTextChanges) {
+    let apiUrl = '/api/v2/properties/' + state.currentProperty.id
+    Object.keys(propertyTextChanges).forEach(function(pendingChangeKey) {
+      state.currentProperty[pendingChangeKey] = propertyTextChanges[pendingChangeKey]
+    })
+    axios.put(apiUrl, {
+      property: state.currentProperty
+    }, {
+      headers: {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json'
+      }
+    }).then(response => {})
   },
   createProperty({ commit, state }) {
     // if (!state.newProperty) {
@@ -114,13 +137,13 @@ const actions = {
     } else {
       delete state.pendingChanges[fieldDetails.fieldName]
     }
-    commit('setHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
+    commit('setPropHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
   },
 }
 
 // mutations
 const mutations = {
-  setHasPendingChanges: (state, result) => {
+  setPropHasPendingChanges: (state, result) => {
     state.hasPendingChanges = result
   },
   // setNewProperty(state, propertyObject) {

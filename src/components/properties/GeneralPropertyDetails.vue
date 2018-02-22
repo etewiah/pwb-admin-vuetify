@@ -1,36 +1,48 @@
 <template>
   <v-layout row>
     <v-flex xs12>
-      <form @submit.prevent="onUpdateProperty">
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
-        </v-layout>
-        <v-layout wrap row>
-          <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in mainInputFields1">
-              <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-          <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in mainInputFields2">
-              <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-          <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in mainInputFields3">
-              <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-          <v-flex xs12 sm3>
-            <template v-for="(fieldDetails) in mainInputFields4">
-              <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-        </v-layout>
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
-        </v-layout>
-      </form>
+      <v-card>
+        <v-card-title primary-title>
+          <div>
+            <h4 class="headline mb-0"></h4>
+          </div>
+        </v-card-title>
+        <v-card-text>
+          <form @submit.prevent="onUpdateProperty">
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+            </v-layout>
+            <v-layout wrap row>
+              <v-flex xs12 sm3>
+                <template v-for="(fieldDetails) in mainInputFields1">
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+              <v-flex xs12 sm3>
+                <template v-for="(fieldDetails) in mainInputFields2">
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+              <v-flex xs12 sm3>
+                <template v-for="(fieldDetails) in mainInputFields3">
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+              <v-flex xs12 sm3>
+                <template v-for="(fieldDetails) in mainInputFields4">
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+            </v-layout>
+          </form>
+        </v-card-text>
+        <v-card-actions>
+          <!-- <v-btn flat color="orange">Share</v-btn> -->
+        </v-card-actions>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -204,16 +216,16 @@ export default {
     }
   },
   computed: {
-    fieldOptions: function() {
+    fieldOptions() {
       return this.$store.state.propertiesStore.fieldOptions
     },
-    hasPendingChanges: function() {
+    hasPendingChanges() {
       return this.$store.state.propertiesStore.hasPendingChanges
     }
   },
-  mounted: function() {
-    let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
-    this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
+  mounted() {
+    // let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
+    // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
     onUpdateProperty() {

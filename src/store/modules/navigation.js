@@ -28,6 +28,11 @@ const state = {
         router: true
       }, {
         icon: 'domain',
+        text: 'Labels',
+        href: 'defaultPropertyLabel',
+        router: true
+      }, {
+        icon: 'domain',
         text: 'New Property',
         href: 'newProperty',
         router: true
@@ -46,16 +51,16 @@ const state = {
     //     tabTitleKey: "webContentSections.footer",
     //     tabRoute: "admin.website.details.footer"
     //   }]
-    // }, {
-    //   icon: "pages",
-    //   tabTitleKey: "site pages",
-    //   // tabRoute: "admin.pages",
-    //   // subMenuItems: [],
-    //   // title: 'Attractions',
-    //   isGroupHeader: true,
-    //   childItems: []
+    {
+      icon: "pages",
+      tabTitleKey: "adminSections.pages",
+      // tabRoute: "admin.pages",
+      // subMenuItems: [],
+      // title: 'Attractions',
+      isGroupHeader: true,
+      childItems: []
 
-    // }, {
+    },
     //   icon: "fa fa-exchange",
     //   tabTitleKey: "adminSections.import",
     //   tabRoute: "admin.io"
@@ -99,11 +104,11 @@ const state = {
     tabTitleKey: "propertySections.text",
     componentName: "TextPropertyDetails",
   }, {
-    tabValue: "venta",
+    tabValue: "sale-rental",
     tabTitleKey: "propertySections.sale",
     componentName: "SalePropertyDetails",
   }, {
-    tabValue: "situacion",
+    tabValue: "location",
     tabTitleKey: "propertySections.location",
     componentName: "GeneralPropertyDetails",
   }, {
@@ -111,7 +116,7 @@ const state = {
     tabTitleKey: "propertySections.extras",
     componentName: "FeaturesPropertyDetails",
   }, {
-    tabValue: "fotos",
+    tabValue: "photos",
     tabTitleKey: "propertySections.photos",
     componentName: "GeneralPropertyDetails",
   }],
@@ -121,16 +126,19 @@ const state = {
       componentName: "PropertyFeatures"
     }, {
       tabValue: "property-types",
-      tabTitleKey: "translationsSections.propertyTypes"
+      tabTitleKey: "translationsSections.propertyTypes",
+      componentName: "PropertyTypes"
       // }, {
       //   tabValue: "property-origins",
       //   tabTitleKey: "translationsSections.propertyOrigins"
     }, {
       tabValue: "property-states",
-      tabTitleKey: "translationsSections.propertyStates"
-    }, {
-      tabValue: "property-labels",
-      tabTitleKey: "translationsSections.propertyLabels"
+      tabTitleKey: "translationsSections.propertyStates",
+      componentName: "PropertyStates"
+      // }, {
+      //   tabValue: "transaction-status",
+      //   tabTitleKey: "translationsSections.propertyLabels",
+      //   componentName: "TransactionStatus"
     }
     // ,{
     //   tabValue: "provinces",

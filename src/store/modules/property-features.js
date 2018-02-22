@@ -2,9 +2,10 @@ import axios from 'axios'
 
 // initial state
 const state = {
-  features: [],
+  propertyFeaturesList: [],
   pendingChanges: {},
   hasPendingChanges: false,
+  cancelPendingChanges: false,
   currentPropertyId: null
 }
 
@@ -24,7 +25,8 @@ const actions = {
         'Accept': 'application/vnd.api+json'
       }
     }).then(response => {
-      commit('setHasPendingChanges', false)
+      commit('setPropFeaturesHasPendingChanges', false)
+      commit('setPropertyFeatures', { result: response.data })
     })
   },
   // Below will compare changes made to a field's value in a form
@@ -41,17 +43,25 @@ const actions = {
     } else {
       delete state.pendingChanges[fieldDetails.fieldName]
     }
-    commit('setHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
+    commit('setPropFeaturesCancelPendingChanges', false)
+    commit('setPropFeaturesHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
   },
 }
 
 // mutations
 const mutations = {
-  setHasPendingChanges: (state, result) => {
+  setPropFeaturesCancelPendingChanges: (state, result) => {
+    state.cancelPendingChanges = result
+  },
+  setPropFeaturesHasPendingChanges: (state, result) => {
     state.hasPendingChanges = result
     if (!result) {
       state.pendingChanges = {}
     }
+  },
+  // below 2 are set by property store when it loads
+  setPropertyFeatures: (state, { result }) => {
+    state.propertyFeaturesList = result
   },
   setFeaturesPropertyId: (state, { result }) => {
     state.currentPropertyId = result

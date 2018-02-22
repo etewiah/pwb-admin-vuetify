@@ -1,34 +1,46 @@
 <template>
   <v-layout row>
     <v-flex xs12>
-      <form @submit.prevent="onUpdateProperty">
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
-        </v-layout>
-        <v-layout wrap row>
-          <v-flex xs12 sm4>
-            <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.sale") }}</h3>
-            <template v-for="(fieldDetails) in saleInputFields">
-              <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-          <v-flex xs12 sm4>
-            <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.longtermRental") }}</h3>
-            <template v-for="(fieldDetails) in longTermRentalInputFields">
-              <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-          <v-flex xs12 sm4>
-            <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.seasonalRental") }}</h3>
-            <template v-for="(fieldDetails) in shortTermRentalInputFields">
-              <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
-            </template>
-          </v-flex>
-        </v-layout>
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" ></FormSubmitter>
-        </v-layout>
-      </form>
+      <v-card>
+        <v-card-title primary-title>
+          <div>
+            <h4 class="headline mb-0"></h4>
+          </div>
+        </v-card-title>
+        <v-card-text>
+          <form @submit.prevent="onUpdateProperty">
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+            </v-layout>
+            <v-layout wrap row>
+              <v-flex xs12 sm4>
+                <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.sale") }}</h3>
+                <template v-for="(fieldDetails) in saleInputFields">
+                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+              <v-flex xs12 sm4>
+                <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.longtermRental") }}</h3>
+                <template v-for="(fieldDetails) in longTermRentalInputFields">
+                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+              <v-flex xs12 sm4>
+                <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.seasonalRental") }}</h3>
+                <template v-for="(fieldDetails) in shortTermRentalInputFields">
+                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                </template>
+              </v-flex>
+            </v-layout>
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+            </v-layout>
+          </form>
+        </v-card-text>
+        <v-card-actions>
+          <!-- <v-btn flat color="orange">Share</v-btn> -->
+        </v-card-actions>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>
@@ -42,8 +54,7 @@ export default {
     FormSubmitter
   },
   props: ["currentProperty"],
-  watch: {
-  },
+  watch: {},
   validations: {
     currentProperty: {
       price_rental_monthly_current_cents: {
