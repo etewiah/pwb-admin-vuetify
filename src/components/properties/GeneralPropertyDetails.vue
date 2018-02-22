@@ -204,14 +204,14 @@ export default {
     }
   },
   computed: {
-    fieldOptions: function() {
+    fieldOptions() {
       return this.$store.state.propertiesStore.fieldOptions
     },
-    hasPendingChanges: function() {
+    hasPendingChanges() {
       return this.$store.state.propertiesStore.hasPendingChanges
     }
   },
-  mounted: function() {
+  mounted() {
     // let fieldNames = "property-origins, property-types, property-states, property-labels, currencies, area-units"
     // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },

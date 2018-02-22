@@ -40,32 +40,28 @@ export default {
     return {
       pendingChanges: {},
       hasPendingChanges: false,
-      localeTitleField: ""
+      // localeTitleField: ""
     }
   },
   // mounted() {
   //   this.localeTitleField = this.currentProperty[this.localeTitleFieldName]
   // },
   watch: {
-    currentProperty: {
-      handler(newValue, oldVal) {
-        this.localeTitleField = _.cloneDeep(newValue[this.localeTitleFieldName])
-      },
-      deep: true
-    },
-    // 'currentProperty' (newValue, oldValue) {
-    //   this.localeTitleField = _.cloneDeep(newValue[this.localeTitleFieldName])
+    // currentProperty: {
+    //   handler(newValue, oldVal) {
+    //     this.localeTitleField = _.cloneDeep(newValue[this.localeTitleFieldName])
+    //   },
+    //   deep: true
     // },
-    // 'model': 'updateFields'
   },
   computed: {
-    shortLocale: function() {
+    shortLocale() {
       return this.locale.substring(0, 2)
     },
-    localeTitleFieldName: function() {
+    localeTitleFieldName() {
       return "title_" + this.shortLocale
     },
-    localeDescriptionFieldName: function() {
+    localeDescriptionFieldName() {
       return "description_" + this.shortLocale
     },
     // localeTitleField() {

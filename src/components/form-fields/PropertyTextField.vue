@@ -29,7 +29,8 @@ export default {
         // this.model = _.cloneDeep(newValue[this.fieldName])
         console.log('resourceModel Changed')
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     // fieldName: {
     //   handler(newValue, oldVal) {
