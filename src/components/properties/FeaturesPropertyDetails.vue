@@ -1,21 +1,32 @@
 <template>
   <v-layout row>
     <v-flex xs12>
-      <form @submit.prevent="onUpdateProperty">
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
-        </v-layout>
-        <v-layout wrap row>
-          <template v-for="(fieldDetails) in featureFields">
-            <v-flex xs12 sm3>
-              <FeatureField :cancelPendingChanges="cancelPendingChanges" :fieldDetails="fieldDetails" v-bind:resourceModel="featuresList"></FeatureField>
-            </v-flex>
-          </template>
-        </v-layout>
-        <v-layout row>
-          <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
-        </v-layout>
-      </form>
+      <v-card>
+        <v-card-title primary-title>
+          <div>
+            <h4 class="headline mb-0"></h4>
+          </div>
+        </v-card-title>
+        <v-card-text>
+          <form @submit.prevent="onUpdateProperty">
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
+            </v-layout>
+            <v-layout wrap row>
+              <template v-for="(fieldDetails) in featureFields">
+                <v-flex xs6 sm3 md2>
+                  <FeatureField :cancelPendingChanges="cancelPendingChanges" :fieldDetails="fieldDetails" v-bind:resourceModel="featuresList"></FeatureField>
+                </v-flex>
+              </template>
+            </v-layout>
+            <v-layout row>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
+            </v-layout>
+          </form>
+        </v-card-text>
+        <v-card-actions>
+        </v-card-actions>
+      </v-card>
     </v-flex>
   </v-layout>
 </template>

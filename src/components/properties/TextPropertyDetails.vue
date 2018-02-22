@@ -17,16 +17,13 @@ export default {
   props: ["currentProperty"],
   watch: {},
   data() {
-    return {
-      // supportedLocales: ["en", "es"]
-    }
+    return {}
   },
   computed: {
-    supportedLocales: function() {
+    supportedLocales() {
       return this.$store.state.supportedLocales
     }
   },
-  mounted: function() {},
   methods: {}
 }
 
