@@ -12,7 +12,7 @@
             <v-layout row>
               <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
-            <v-layout v-for="(field, index) in pageTitleFields" row>
+            <v-layout v-for="(field, index) in pageTitleFields" :key="field.fieldName" row>
               <v-flex xs12 sm12 offset-sm0>
                 <v-text-field name="title" v-on:keyup="onTitleChange(field.fieldName, field.fieldValue)" :label="'Title ' + $t(field.labelTextTKey)" v-model="field.fieldValue"></v-text-field>
               </v-flex>

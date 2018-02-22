@@ -64,10 +64,6 @@ export default {
   //   // does NOT have access to `this` component instance,
   //   // because it has not been created yet when this guard is called!
   // },
-  watch: {
-    // call again the method if the route changes
-    '$route': 'fetchData'
-  },
   methods: {
     fetchData: function() {
       let fieldNames = "extras"
@@ -82,6 +78,10 @@ export default {
   },
   created: function() {
     this.fetchData()
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'fetchData'
   },
   // beforeRouteUpdate(to, from, next) {
 

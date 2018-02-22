@@ -2,17 +2,17 @@
   <v-layout wrap row>
     <template v-for="(locale) in supportedLocales">
       <v-flex xs12 sm6 class="pr-3 pt-4">
-        <PropertyTextField v-bind:locale="locale" v-bind:currentProperty="currentProperty"></PropertyTextField>
+        <PropertyTextFieldsContainer v-bind:locale="locale" v-bind:currentProperty="currentProperty"></PropertyTextFieldsContainer>
       </v-flex>
     </template>
   </v-layout>
 </template>
 <script>
-import PropertyTextField from '@/components/form-fields/PropertyTextField'
+import PropertyTextFieldsContainer from '@/components/properties/property-text-details/PropertyTextFieldsContainer'
 // import { required } from 'vuelidate/lib/validators'
 export default {
   components: {
-    PropertyTextField
+    PropertyTextFieldsContainer
   },
   props: ["currentProperty"],
   watch: {},
