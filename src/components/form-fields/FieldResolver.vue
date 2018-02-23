@@ -14,7 +14,8 @@
       <SwitchField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :switchFieldValue="currentFieldValue"></SwitchField>
     </template>
     <template v-else>
-      <v-text-field name="title" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" id="title" v-model="currentFieldValue"></v-text-field>
+      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" 
+      :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]"></TextField>
     </template>
   </div>
 </template>

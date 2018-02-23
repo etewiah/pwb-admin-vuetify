@@ -10,32 +10,32 @@
         <v-card-text>
           <form @submit.prevent="onUpdateProperty">
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
             <v-layout wrap row>
               <v-flex xs12 sm3>
                 <template v-for="(fieldDetails) in mainInputFields1">
-                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
               <v-flex xs12 sm3>
                 <template v-for="(fieldDetails) in mainInputFields2">
-                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
               <v-flex xs12 sm3>
                 <template v-for="(fieldDetails) in mainInputFields3">
-                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
               <v-flex xs12 sm3>
                 <template v-for="(fieldDetails) in mainInputFields4">
-                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :fieldOptions="fieldOptions" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
             </v-layout>
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
           </form>
         </v-card-text>
@@ -219,6 +219,9 @@ export default {
     fieldOptions() {
       return this.$store.state.propertiesStore.fieldOptions
     },
+    cancelPendingChanges() {
+      return this.$store.state.propertiesStore.cancelPendingChanges
+    },
     hasPendingChanges() {
       return this.$store.state.propertiesStore.hasPendingChanges
     }
@@ -228,6 +231,12 @@ export default {
     // this.$store.dispatch('loadPropertyFieldOptions', fieldNames)
   },
   methods: {
+    changesCanceled() {
+      // below will trigger to child input components to reset
+      // this.cancelPendingChanges = true
+      this.$store.commit('setPropCancelPendingChanges', true)
+      this.$store.commit('setPropHasPendingChanges', false)
+    },
     onUpdateProperty() {
       this.$store.dispatch('updateProperty')
     },
