@@ -83,8 +83,9 @@ export default {
     changesCanceled() {
 
       this.pendingChanges = {}
-      // below will trigger to child input components to reset
-      // this.cancelPendingChanges = true
+      // Below will result in cancelPendingChanges here getting set to true.
+      // This in turn will trigger child input components to reset values
+      // to original
       this.$store.commit('setPropFeaturesCancelPendingChanges', true)
       this.$store.commit('setPropFeaturesHasPendingChanges', false)
       // this.hasPendingChanges = false

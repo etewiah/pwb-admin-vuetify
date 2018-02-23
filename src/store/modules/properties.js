@@ -8,6 +8,7 @@ const state = {
   properties: [],
   pendingChanges: {},
   hasPendingChanges: false,
+  cancelPendingChanges: false,
   currentProperty: {
     attributes: {}
   },
@@ -137,6 +138,7 @@ const actions = {
     } else {
       delete state.pendingChanges[fieldDetails.fieldName]
     }
+    commit('setPropCancelPendingChanges', false)
     commit('setPropHasPendingChanges', Object.keys(state.pendingChanges).length > 0)
   },
 }
@@ -145,6 +147,11 @@ const actions = {
 const mutations = {
   setPropHasPendingChanges: (state, result) => {
     state.hasPendingChanges = result
+  },
+  setPropCancelPendingChanges: (state, result) => {
+    // Will trigger input components watching this
+    // to reset values to original
+    state.cancelPendingChanges = result
   },
   // setNewProperty(state, propertyObject) {
   //   state.properties.push(propertyObject)
