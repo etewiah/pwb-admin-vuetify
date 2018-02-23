@@ -5,6 +5,8 @@
   </keep-alive>
 </template>
 <script>
+import PropertyPhotosDetails from '@/components/properties/PropertyPhotosDetails'
+import PropertyLocationDetails from '@/components/properties/PropertyLocationDetails'
 import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
 import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
 import FeaturesPropertyDetails from '@/components/properties/FeaturesPropertyDetails'
@@ -18,6 +20,8 @@ export default {
     TextPropertyDetails,
     FeaturesPropertyDetails,
     SalePropertyDetails,
+    PropertyLocationDetails,
+    PropertyPhotosDetails
   },
   computed: {
     propertyDetailsComponent() {

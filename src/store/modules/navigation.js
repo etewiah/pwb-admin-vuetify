@@ -110,7 +110,7 @@ const state = {
   }, {
     tabValue: "location",
     tabTitleKey: "propertySections.location",
-    componentName: "GeneralPropertyDetails",
+    componentName: "PropertyLocationDetails",
   }, {
     tabValue: "features",
     tabTitleKey: "propertySections.extras",
@@ -118,7 +118,7 @@ const state = {
   }, {
     tabValue: "photos",
     tabTitleKey: "propertySections.photos",
-    componentName: "GeneralPropertyDetails",
+    componentName: "PropertyPhotosDetails",
   }],
   propertyLabelTabs: [{
       tabValue: "features",
