@@ -1,7 +1,8 @@
 <template>
   <div class="mr-4">
     <template v-if="fieldDetails.inputType == 'number'">
-      <v-text-field name="title" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" id="title" v-model="currentFieldValue"></v-text-field>
+      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" 
+      :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]"></TextField>
     </template>
     <template v-else-if="fieldDetails.inputType == 'select'">
       <div class="text-xs-left">
@@ -19,12 +20,13 @@
 </template>
 <script>
 import SwitchField from '@/components/form-fields/with-rollback/SwitchField'
-// import SwitchField from '@/components/form-fields/SwitchField'
+import TextField from '@/components/form-fields/with-rollback/TextField'
 // import { required, minLength } from 'vuelidate/lib/validators'
 import _ from 'lodash'
 export default {
   components: {
-    SwitchField
+    SwitchField,
+    TextField
   },
   props: ["resourceModel", "fieldDetails", "fieldOptions", "cancelPendingChanges"],
   data() {

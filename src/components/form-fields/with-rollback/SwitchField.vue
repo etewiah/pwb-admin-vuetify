@@ -4,7 +4,7 @@
       {{$t(fieldDetails.labelTextTKey) }}
     </div>
     <v-flex xs12>
-      <v-switch v-bind:label="fieldLabel" @change="booleanFieldHandler" v-model="fieldValue"></v-switch>
+      <v-switch v-bind:label="fieldLabel" @change="fieldChangeHandler" v-model="fieldValue"></v-switch>
     </v-flex>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    booleanFieldHandler(newValue) {
+    fieldChangeHandler(newValue) {
       // if (newValue) {
       //   this.fieldLabel = "Yes"
       // } else {
