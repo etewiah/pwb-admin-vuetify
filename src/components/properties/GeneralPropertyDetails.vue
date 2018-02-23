@@ -118,6 +118,7 @@ export default {
         tooltipTextTKey: false,
         fieldName: "count_bedrooms",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
@@ -133,6 +134,7 @@ export default {
         tooltipTextTKey: false,
         fieldName: "count_bathrooms",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
@@ -149,6 +151,7 @@ export default {
         // fieldType: "simpleSelect",
         // fieldDbType: "boolean",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
@@ -164,6 +167,7 @@ export default {
         tooltipTextTKey: false,
         fieldName: "year_construction",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
@@ -181,6 +185,7 @@ export default {
         tooltipTextTKey: false,
         fieldName: "plot_area",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
@@ -196,6 +201,7 @@ export default {
         tooltipTextTKey: false,
         fieldName: "constructed_area",
         fieldType: "simpleInput",
+        fieldDbType: "int",
         inputType: "number",
         constraints: {
           inputValue: {
