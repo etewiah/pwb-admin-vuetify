@@ -98,15 +98,15 @@ const state = {
   propertyTabs: [{
     tabValue: "general",
     tabTitleKey: "propertySections.general",
-    componentName: "GeneralPropertyDetails",
+    componentName: "PropertyGeneralDetails",
   }, {
     tabValue: "text",
     tabTitleKey: "propertySections.text",
-    componentName: "TextPropertyDetails",
+    componentName: "PropertyTextDetails",
   }, {
     tabValue: "sale-rental",
     tabTitleKey: "propertySections.sale",
-    componentName: "SalePropertyDetails",
+    componentName: "PropertySaleDetails",
   }, {
     tabValue: "location",
     tabTitleKey: "propertySections.location",
@@ -114,7 +114,7 @@ const state = {
   }, {
     tabValue: "features",
     tabTitleKey: "propertySections.extras",
-    componentName: "FeaturesPropertyDetails",
+    componentName: "PropertyFeaturesDetails",
   }, {
     tabValue: "photos",
     tabTitleKey: "propertySections.photos",
