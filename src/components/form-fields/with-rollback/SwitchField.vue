@@ -28,13 +28,21 @@ export default {
         this.fieldValue = this.originalValue
       }
     },
-    switchFieldValue: function(val) {
-      this.fieldValue = val
-      this.originalValue = val
-      // if (val) {
-      //   this.fieldLabel = "Yes"
-      // }
+    switchFieldValue: {
+      handler(newValue, oldVal) {
+        this.fieldValue = newValue
+        this.originalValue = newValue
+      },
+      // deep: true,
+      immediate: true,
     },
+    //     switchFieldValue: function(val) {
+    //   this.fieldValue = val
+    //   this.originalValue = val
+    //   // if (val) {
+    //   //   this.fieldLabel = "Yes"
+    //   // }
+    // },
   },
   computed: {
     fieldLabel() {

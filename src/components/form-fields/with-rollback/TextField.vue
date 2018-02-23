@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-text-field name="text-input" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" 
-     v-on:keyup="fieldChangeHandler" v-model="localFieldValue"></v-text-field>
+    <v-text-field name="text-input" :label="$t(fieldDetails.labelTextTKey) + ' ' + $t(fieldDetails.suffixTKey)" v-on:keyup="fieldChangeHandler" v-model="localFieldValue"></v-text-field>
   </div>
 </template>
 <script>
@@ -23,9 +22,13 @@ export default {
         this.localFieldValue = this.originalValue
       }
     },
-    currentFieldValue: function(val) {
-      this.localFieldValue = val
-      this.originalValue = val
+    currentFieldValue: {
+      handler(newValue, oldVal) {
+        this.localFieldValue = newValue
+        this.originalValue = newValue
+      },
+      // deep: true,
+      immediate: true,
     },
   },
   computed: {

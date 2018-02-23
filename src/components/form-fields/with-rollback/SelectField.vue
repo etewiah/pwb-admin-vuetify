@@ -3,8 +3,7 @@
     <div class="text-xs-left">
       {{$t(fieldDetails.labelTextTKey) }}:
     </div>
-    <v-select :items="selectItems" v-model="localFieldValue" label="Select"
-    @change="fieldChangeHandler" item-text="name" single-line bottom></v-select>
+    <v-select :items="selectItems" v-model="localFieldValue" label="Select" @change="fieldChangeHandler" item-text="name" single-line bottom></v-select>
   </div>
 </template>
 <script>
@@ -26,9 +25,13 @@ export default {
         this.localFieldValue = this.originalValue
       }
     },
-    currentFieldValue: function(val) {
-      this.localFieldValue = val
-      this.originalValue = val
+    currentFieldValue: {
+      handler(newValue, oldVal) {
+        this.localFieldValue = newValue
+        this.originalValue = newValue
+      },
+      // deep: true,
+      immediate: true,
     },
   },
   computed: {
