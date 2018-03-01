@@ -5,19 +5,23 @@
   </keep-alive>
 </template>
 <script>
-import GeneralPropertyDetails from '@/components/properties/GeneralPropertyDetails'
-import TextPropertyDetails from '@/components/properties/TextPropertyDetails'
-import FeaturesPropertyDetails from '@/components/properties/FeaturesPropertyDetails'
-import SalePropertyDetails from '@/components/properties/SalePropertyDetails'
+import PropertyPhotosDetails from '@/components/properties/PropertyPhotosDetails'
+import PropertyLocationDetails from '@/components/properties/PropertyLocationDetails'
+import PropertyGeneralDetails from '@/components/properties/PropertyGeneralDetails'
+import PropertyTextDetails from '@/components/properties/PropertyTextDetails'
+import PropertyFeaturesDetails from '@/components/properties/PropertyFeaturesDetails'
+import PropertySaleDetails from '@/components/properties/PropertySaleDetails'
 export default {
   data() {
     return {}
   },
   components: {
-    GeneralPropertyDetails,
-    TextPropertyDetails,
-    FeaturesPropertyDetails,
-    SalePropertyDetails,
+    PropertyGeneralDetails,
+    PropertyTextDetails,
+    PropertyFeaturesDetails,
+    PropertySaleDetails,
+    PropertyLocationDetails,
+    PropertyPhotosDetails
   },
   computed: {
     propertyDetailsComponent() {

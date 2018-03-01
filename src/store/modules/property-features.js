@@ -51,6 +51,8 @@ const actions = {
 // mutations
 const mutations = {
   setPropFeaturesCancelPendingChanges: (state, result) => {
+    // Will trigger input components watching this
+    // to reset values to original
     state.cancelPendingChanges = result
   },
   setPropFeaturesHasPendingChanges: (state, result) => {
