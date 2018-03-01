@@ -3,19 +3,6 @@
 // initial state
 const state = {
   mainNavItems: [
-    // {
-    //     icon: "fa fa-home",
-    //     tabTitleKey: "adminSections.start",
-    //     tabRoute: "admin.setup"
-    //     // tabRoute: "admin.inicio"
-    //   }, {
-    //     tabTitleKey: "adminSections.properties",
-    //     tabRoute: "admin.propiedades",
-    //     icon: 'domain',
-    //     text: 'Properties',
-    //     href: 'properties',
-    //     router: true,
-    //   },
     {
       icon: 'domain',
       title: 'Properties',
@@ -38,19 +25,6 @@ const state = {
         router: true
       }]
     },
-    // {
-    //   icon: "fa fa-desktop",
-    //   tabTitleKey: "adminSections.content",
-    //   tabRoute: "admin.website",
-    //   subMenuItems: [{
-    //     icon: "fa fa-gear",
-    //     tabTitleKey: "adminSections.websiteSettings",
-    //     tabRoute: "admin.website.settings"
-    //   }, {
-    //     icon: "fa fa-keyboard-o",
-    //     tabTitleKey: "webContentSections.footer",
-    //     tabRoute: "admin.website.details.footer"
-    //   }]
     {
       icon: "pages",
       tabTitleKey: "adminSections.pages",
@@ -61,6 +35,92 @@ const state = {
       childItems: []
 
     },
+    {
+      icon: "settings",
+      title: 'Website',
+      tabTitleKey: "adminSections.content",
+      isGroupHeader: true,
+      childItems: [{
+        icon: 'tv',
+        text: 'Settings',
+        href: 'adminWebsiteSettings',
+        router: true
+      }, {
+        icon: 'record_voice_over',
+        text: 'Language',
+        href: 'adminWebsiteLanguages',
+        router: true
+      }, {
+        icon: 'record_voice_over',
+        text: 'Site CSS',
+        href: 'adminWebsiteCss',
+        router: true
+      }, {
+        icon: 'vertical_align_bottom',
+        text: 'Footer',
+        href: 'adminWebsiteFooter',
+        router: true
+      }]
+    },
+  ],
+  propertyTabs: [{
+    tabValue: "general",
+    tabTitleKey: "propertySections.general",
+    componentName: "PropertyGeneralDetails",
+  }, {
+    tabValue: "text",
+    tabTitleKey: "propertySections.text",
+    componentName: "PropertyTextDetails",
+  }, {
+    tabValue: "sale-rental",
+    tabTitleKey: "propertySections.sale",
+    componentName: "PropertySaleDetails",
+  }, {
+    tabValue: "location",
+    tabTitleKey: "propertySections.location",
+    componentName: "PropertyLocationDetails",
+  }, {
+    tabValue: "features",
+    tabTitleKey: "propertySections.extras",
+    componentName: "PropertyFeaturesDetails",
+  }, {
+    tabValue: "photos",
+    tabTitleKey: "propertySections.photos",
+    componentName: "PropertyPhotosDetails",
+  }],
+  propertyLabelTabs: [{
+    tabValue: "features",
+    tabTitleKey: "translationsSections.extras",
+    componentName: "PropertyFeatures"
+  }, {
+    tabValue: "property-types",
+    tabTitleKey: "translationsSections.propertyTypes",
+    componentName: "PropertyTypes"
+    // }, {
+    //   tabValue: "property-origins",
+    //   tabTitleKey: "translationsSections.propertyOrigins"
+  }, {
+    tabValue: "property-states",
+    tabTitleKey: "translationsSections.propertyStates",
+    componentName: "PropertyStates"
+    // }, {
+    //   tabValue: "transaction-status",
+    //   tabTitleKey: "translationsSections.propertyLabels",
+    //   componentName: "TransactionStatus"
+  },
+    // {
+    //     icon: "fa fa-home",
+    //     tabTitleKey: "adminSections.start",
+    //     tabRoute: "admin.setup"
+    //     // tabRoute: "admin.inicio"
+    //   }, {
+    //     tabTitleKey: "adminSections.properties",
+    //     tabRoute: "admin.propiedades",
+    //     icon: 'domain',
+    //     text: 'Properties',
+    //     href: 'properties',
+    //     router: true,
+    //   },
     //   icon: "fa fa-exchange",
     //   tabTitleKey: "adminSections.import",
     //   tabRoute: "admin.io"
@@ -94,56 +154,7 @@ const state = {
     //   href: 'CreateContact',
     //   router: true
     // }
-  ],
-  propertyTabs: [{
-    tabValue: "general",
-    tabTitleKey: "propertySections.general",
-    componentName: "GeneralPropertyDetails",
-  }, {
-    tabValue: "text",
-    tabTitleKey: "propertySections.text",
-    componentName: "TextPropertyDetails",
-  }, {
-    tabValue: "sale-rental",
-    tabTitleKey: "propertySections.sale",
-    componentName: "SalePropertyDetails",
-  }, {
-    tabValue: "location",
-    tabTitleKey: "propertySections.location",
-    componentName: "GeneralPropertyDetails",
-  }, {
-    tabValue: "features",
-    tabTitleKey: "propertySections.extras",
-    componentName: "FeaturesPropertyDetails",
-  }, {
-    tabValue: "photos",
-    tabTitleKey: "propertySections.photos",
-    componentName: "GeneralPropertyDetails",
-  }],
-  propertyLabelTabs: [{
-      tabValue: "features",
-      tabTitleKey: "translationsSections.extras",
-      componentName: "PropertyFeatures"
-    }, {
-      tabValue: "property-types",
-      tabTitleKey: "translationsSections.propertyTypes",
-      componentName: "PropertyTypes"
-      // }, {
-      //   tabValue: "property-origins",
-      //   tabTitleKey: "translationsSections.propertyOrigins"
-    }, {
-      tabValue: "property-states",
-      tabTitleKey: "translationsSections.propertyStates",
-      componentName: "PropertyStates"
-      // }, {
-      //   tabValue: "transaction-status",
-      //   tabTitleKey: "translationsSections.propertyLabels",
-      //   componentName: "TransactionStatus"
-    }
-    // ,{
-    //   tabValue: "provinces",
-    //   tabTitleKey: "translationsSections.provinces"
-    // }
+
   ],
 }
 

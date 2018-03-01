@@ -12,7 +12,9 @@
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
+    "jquery": "^3.3.1",
     "vue": "^2.5.2",
+    "vue-color": "^2.4.4",
     "vue-router": "^3.0.1",
     "vuetify": "^0.17.6",
     "vuex": "^3.0.1"
@@ -34,7 +36,7 @@
     "copy-webpack-plugin": "^4.1.1",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
-    "eslint": "^4.9.0",
+    "eslint": "^4.18.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
@@ -43,6 +45,7 @@
     "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.3.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.0",

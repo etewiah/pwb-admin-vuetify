@@ -54,8 +54,6 @@ export default {
   },
   methods: {
     updatePendingChanges(event) {
-      // with :value="model"
-      // need to retrieve updated value myself
       let newValue = event.currentTarget.value
       this.$emit('updatePendingChanges', newValue, this.fieldName)
     },

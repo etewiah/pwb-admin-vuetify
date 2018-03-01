@@ -10,30 +10,30 @@
         <v-card-text>
           <form @submit.prevent="onUpdateProperty">
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
             <v-layout wrap row>
               <v-flex xs12 sm4>
                 <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.sale") }}</h3>
                 <template v-for="(fieldDetails) in saleInputFields">
-                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
               <v-flex xs12 sm4>
                 <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.longtermRental") }}</h3>
                 <template v-for="(fieldDetails) in longTermRentalInputFields">
-                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
               <v-flex xs12 sm4>
                 <h3 class="text-xs-left mb-3">{{$t("propertyGeneralSections.seasonalRental") }}</h3>
                 <template v-for="(fieldDetails) in shortTermRentalInputFields">
-                  <FieldResolver :fieldDetails="fieldDetails" v-bind:resourceModel="currentProperty"></FieldResolver>
+                  <FieldResolver :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" v-bind:resourceModel="currentProperty"></FieldResolver>
                 </template>
               </v-flex>
             </v-layout>
             <v-layout row>
-              <FormSubmitter :hasPendingChanges="hasPendingChanges"></FormSubmitter>
+              <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
             </v-layout>
           </form>
         </v-card-text>
@@ -193,15 +193,21 @@ export default {
     }
   },
   computed: {
-    hasPendingChanges: function() {
+    cancelPendingChanges() {
+      return this.$store.state.propertiesStore.cancelPendingChanges
+    },
+    hasPendingChanges() {
       return this.$store.state.propertiesStore.hasPendingChanges
-      // return Object.keys(this.$store.state.propertiesStore.pendingChanges).length > 0;
     }
   },
-  // mounted: function() {
-  //   this.$store.dispatch('loadProperty', this.$route.params["id"])
-  // },
   methods: {
+    changesCanceled() {
+      // below will trigger to child input components to reset
+      // this.cancelPendingChanges = true
+      this.$store.commit('setPropCancelPendingChanges', true)
+      this.$store.commit('setPropHasPendingChanges', false)
+    },
+
     onUpdateProperty() {
       this.$store.dispatch('updateProperty')
     },

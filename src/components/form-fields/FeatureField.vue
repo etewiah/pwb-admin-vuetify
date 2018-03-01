@@ -11,13 +11,11 @@
   </div>
 </template>
 <script>
-import SwitchField from '@/components/form-fields/SwitchField'
+// import SwitchField from '@/components/form-fields/SwitchField'
 // import { required, minLength } from 'vuelidate/lib/validators'
 // import _ from 'lodash'
 export default {
-  components: {
-    SwitchField
-  },
+  components: {},
   props: ["resourceModel", "fieldDetails", "cancelPendingChanges"],
   data() {
     return {
