@@ -12,6 +12,10 @@
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-regular": "^5.0.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.8",
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.4",
+    "@fortawesome/vue-fontawesome": "0.0.22",
     "jquery": "^3.3.1",
     "vue": "^2.5.2",
     "vue-color": "^2.4.4",
