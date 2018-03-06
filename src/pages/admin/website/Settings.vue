@@ -1,84 +1,107 @@
 <template>
   <v-container>
-      <v-slide-y-transition mode="out-in">
-          <v-container grid-list-md>
-              <v-flex d-flex xs12>
-                <v-card color="gray" dark>
-                  <div style="display: inline=block; float: right;" v-show="dataChanged">
-                    You have unsaved changes <v-btn color="success">Save Changes</v-btn>                    
-                    </div>
-                  <v-card-title primary class="title">Website Settings</v-card-title> 
-                </v-card>
-              </v-flex>
-              <v-layout row wrap>
-                  <v-flex d-flex xs6 contain>
-                      <v-card contain>
-                          <v-card-title><h2>General</h2></v-card-title>
-                          <v-card-text>
-                              <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="dataChanged=true"></v-text-field>
-                          </v-card-text>
-                          <v-divider></v-divider>
-                          <v-card-title xs12><h2>Appearance</h2></v-card-title>
-                          <v-card-text>
-                              <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="dataChanged=true"></v-select>
-                          </v-card-text>
-                          <v-divider></v-divider>
-                          <v-card-title xs12><h2>TODO: Logo</h2></v-card-title>
-                          <v-card-text align-center>
-                              <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
-                              <!-- <v-card-media src="@/assets/logo.png" height="120px"></v-card-media> -->
-                              <v-card-actions>
-                                  <v-btn color="primary">Upload</v-btn>
-                                  <v-card-text>Recommended size for the logo image is <code>120px x 80px</code></v-card-text>
-                              </v-card-actions>
-                          </v-card-text>
-                      </v-card>
+    <v-slide-y-transition mode="out-in">
+      <v-container grid-list-md>
+        <v-flex d-flex xs12>
+          <v-card color="gray" dark>
+            <div style="display: inline=block; float: right;" v-show="dataChanged">
+              You have unsaved changes
+              <v-btn color="success">Save Changes</v-btn>
+            </div>
+            <v-card-title primary class="title">Website Settings</v-card-title>
+          </v-card>
+        </v-flex>
+        <v-layout row wrap>
+          <v-flex xs6>
+            <v-card contain>
+              <v-card-title>
+                <h2>General</h2>
+              </v-card-title>
+              <v-card-text>
+                <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="dataChanged=true"></v-text-field>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-title xs12>
+                <h2>Appearance</h2>
+              </v-card-title>
+              <v-card-text>
+                <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="dataChanged=true"></v-select>
+              </v-card-text>
+              <v-divider></v-divider>
+              <v-card-title xs12>
+                <h2>TODO: Logo</h2>
+              </v-card-title>
+              <v-card-text align-center>
+                <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
+                <!-- <v-card-media src="@/assets/logo.png" height="120px"></v-card-media> -->
+                <v-card-actions>
+                  <v-btn color="primary">Upload</v-btn>
+                  <v-card-text>Recommended size for the logo image is
+                    <code>120px x 80px</code>
+                  </v-card-text>
+                </v-card-actions>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+          <v-flex xs6>
+            <v-card contain>
+              <v-card-title xs12>
+                <h2>Colors</h2>
+              </v-card-title>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
-                  <v-flex d-flex xs6 contain>
-                      <v-card contain>
-                          <v-card-title xs12><h2>Colors</h2></v-card-title>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-layout row>
-                                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true" ></v-flex>
-                                  <v-flex xs6><v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true" ></v-text-field></v-flex>
-                              </v-layout>
-                          </v-card-text>
-                      </v-card>
+                </v-layout>
+              </v-card-text>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
-              </v-layout>
-          </v-container>
-      </v-slide-y-transition>
-      <pre>{{ WebsiteSettings }}</pre>
+                </v-layout>
+              </v-card-text>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+              <v-card-text>
+                <v-layout row>
+                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6>
+                    <v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-slide-y-transition>
+    <pre>{{ WebsiteSettings }}</pre>
   </v-container>
 </template>
 
