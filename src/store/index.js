@@ -23,7 +23,7 @@ const store = new Vuex.Store({
     supportedLocales: [],
   },
   actions: {
-    loadSetupInfo: function({ commit }) {
+    loadSetupInfo: function ({ commit }) {
       axios.get('/api/v2/agency').then((response) => {
         let token = response.headers["x-csrf-token"]
         axios.defaults.headers.common['X-CSRF-Token'] = token
