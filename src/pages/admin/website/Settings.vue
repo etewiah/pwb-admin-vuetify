@@ -1,36 +1,31 @@
 <template>
   <v-container>
     <v-slide-y-transition mode="out-in">
-      <v-container fluid grid-list-md>
+      <v-container grid-list-md>
         <v-flex d-flex xs12>
           <v-card color="gray" dark>
-            <div style="display: inline=block; float: right; margin-right: 0.25em;" v-show="dataManager.hasChanges || dataManager.saveSuccess">
-              <v-fab-transition>
-                <span>
-                  <v-icon color="warning">{{dataManager.icon}}</v-icon> &nbsp;{{dataManager.message}}
-                  <v-btn color="success" v-show="!dataManager.saveSuccess" @click="saveChanges();">Save Changes</v-btn>
-                </span>
-              </v-fab-transition>
+            <div style="display: inline=block; float: right;" v-show="dataChanged">
+              You have unsaved changes
+              <v-btn color="success">Save Changes</v-btn>
             </div>
             <v-card-title primary class="title">Website Settings</v-card-title>
           </v-card>
         </v-flex>
-
         <v-layout row wrap>
-          <v-flex d-flex xs12 sm6>
+          <v-flex xs6>
             <v-card contain>
               <v-card-title>
                 <h2>General</h2>
               </v-card-title>
               <v-card-text>
-                <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="dataChanged=true"></v-text-field>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-title xs12>
                 <h2>Appearance</h2>
               </v-card-title>
               <v-card-text>
-                <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="dataManager.hasChanges=true"></v-select>
+                <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="dataChanged=true"></v-select>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-title xs12>
@@ -48,63 +43,61 @@
               </v-card-text>
             </v-card>
           </v-flex>
-
-          <v-flex d-flex xs12 sm6>
+          <v-flex xs6>
             <v-card contain>
               <v-card-title xs12>
                 <h2>Colors</h2>
               </v-card-title>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataManager.hasChanges=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataManager.hasChanges=true"></v-text-field>
+                    <v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
             </v-card>
           </v-flex>
-
         </v-layout>
       </v-container>
     </v-slide-y-transition>
@@ -121,12 +114,7 @@ import("../../../../3rdparty/color-picker-master/color-picker");
 export default {
   data() {
     return {
-      dataManager: {
-        hasChanges: false,
-        message: "You have unsaved changes",
-        icon: "new_releases",
-        saveSuccess: false
-      },
+      dataChanged: false,
       WebsiteSettings: {
         analytics_id: "",
         style_variables: {
@@ -189,26 +177,18 @@ export default {
     this.createColorPicker("#colorPickerFooterPrimaryText");
     this.createColorPicker("#colorPickerFooterSecondaryText");
     // End Mounted()
-    this.dataManager.hasChanges = false;
+    this.dataChanged = false;
   },
   methods: {
-    saveChanges() {
-      // TODO: save PUT method here...
-      // assume successful change
-      this.dataManager.icon = "info";
-      this.dataManager.message = "Successfully saved changes.";
-      this.dataManager.saveSuccess = true;
-      this.dataManager.hasChanges = false;
-    },
     createColorPicker(elementID) {
       var el = document.querySelector(elementID);
       var picker;
       if (window.CP) {
         picker = new window.CP(el); // show color picker by click (default)
 
-        picker.target.onclick = function(e) {
-          e.preventDefault(); // prevent showing native color picker panel
-        };
+        // picker.target.onclick = function(e) {
+        //   e.preventDefault(); // prevent showing native color picker panel
+        // };
         // var colorWindow = document.createElement("input");
         // colorWindow.className = "color-code";
         // colorWindow.pattern = "^#[A-Fa-f0-9]{6}$";
@@ -250,6 +230,26 @@ input[type="color"] {
   border-image: initial;
   padding: 1px 2px;
 }
+/* .color-code {
+  display: block;
+  clear: both;
+  width: 170px;
+  height: 2em;
+  margin: 0;
+  padding: 0 0.5em;
+  background: #ffa;
+  border: 0;
+  border-top: 1px solid;
+  border-top-color: inherit;
+  font: normal normal 13px/2em Helmet, FreeSans, Sans-Serif;
+  color: #000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.color-code:invalid {
+  color: #f00;
+} */
 </style>
 
 <style>
