@@ -1,31 +1,45 @@
 <template>
   <v-container>
-      <v-slide-y-transition mode="out-in">
-          <v-container grid-list-md>
-              <v-flex d-flex xs12>
-                  <v-card color="black" dark>
-                      <v-card-title primary class="title">Website Footer</v-card-title>
-                  </v-card>
-              </v-flex>
-              <v-layout row wrap>
-                  <v-flex d-flex xs12 contain>
-                      <v-card contain>
-                          <v-card-title><h2>Social Links</h2></v-card-title>
-                          <v-card-text>
-                              <v-text-field label="Facebook" prepend-icon="bug_report" v-model="WebsiteSettings.social_media.facebook"></v-text-field>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-text-field label="Linked In" prepend-icon="bug_report" v-model="WebsiteSettings.social_media.linkedin"></v-text-field>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-text-field label="Twitter" prepend-icon="bug_report" v-model="WebsiteSettings.social_media.twitter"></v-text-field>
-                          </v-card-text>
-                      </v-card>
-                  </v-flex>                 
-              </v-layout>
-          </v-container>
-      </v-slide-y-transition>
-      <pre>{{ WebsiteSettings }}</pre>
+    <v-slide-y-transition mode="out-in">
+      <v-container grid-list-xs>
+        <v-flex d-flex xs12>
+          <v-card color="black" dark>
+            <v-card-title primary class="title">Website Footer</v-card-title>
+          </v-card>
+        </v-flex>
+
+        <v-layout row wrap>
+          <v-flex xs12>
+            <v-card-title>
+              <h2>Social Links</h2>
+            </v-card-title>
+          </v-flex>
+
+          <v-flex xs1 style="text-align: center;">
+            <i class="fab fa-facebook-square fa-3x"></i>
+          </v-flex>
+          <v-flex xs11 sm11 md11>
+            <v-text-field label="Facebook" v-model="WebsiteSettings.social_media.facebook"></v-text-field>
+          </v-flex>
+
+          <v-flex xs1 style="text-align: center;">
+            <i class="fab fa-linkedin fa-3x"></i>
+          </v-flex>
+          <v-flex xs11 sm11 md11>
+            <v-text-field label="LinkedIn" v-model="WebsiteSettings.social_media.linkedin"></v-text-field>
+          </v-flex>
+
+          <v-flex xs1 style="text-align: center;">
+            <i class="fab fa-twitter fa-3x"></i>
+          </v-flex>
+          <v-flex xs11 sm11 md11>
+            <v-text-field label="Twitter" v-model="WebsiteSettings.social_media.twitter"></v-text-field>
+          </v-flex>
+
+        </v-layout>
+      </v-container>
+    </v-slide-y-transition>
+    <pre>{{ WebsiteSettings }}</pre>
   </v-container>
 </template>
 
