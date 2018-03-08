@@ -109,7 +109,7 @@
 <script>
 // let AxiosApi = require("@/store/modules/api");
 import AxiosApi from "@/store/modules/api";
-import("../../../../3rdparty/color-picker-master/color-picker");
+// import("../../../../3rdparty/color-picker-master/color-picker");
 
 export default {
   data() {
@@ -135,7 +135,13 @@ export default {
   computed: {},
   mounted: function() {
     AxiosApi.GetWebsiteSettings(websiteData => {
-      // fix some data for "SiteLayout"
+      websiteData = this.FixSiteLayoutJSON(websiteData);
+    });
+    this.dataChanged = false;
+    // End Mounted()
+  },
+  methods: {
+    FixSiteLayoutJSON(websiteData) {
       if (websiteData) {
         if (websiteData.style_variables.body_style) {
           var siteStyle = websiteData.style_variables.body_style;
@@ -145,7 +151,6 @@ export default {
               siteStyle.length
             );
             websiteData.style_variables.body_style = siteStyle;
-            localStorage.WebSiteData = JSON.stringify(websiteData);
           }
         }
         if (websiteData.style_variables.primary_color.length < 6) {
@@ -166,51 +171,8 @@ export default {
         if (websiteData.style_variables.footer_sec_text_color.length < 6) {
           websiteData.style_variables.footer_sec_text_color = "#8f8f8f";
         }
+        localStorage.WebSiteData = JSON.stringify(websiteData);
         this.WebsiteSettings = websiteData;
-      }
-    });
-
-    this.createColorPicker("#colorPickerPrimary");
-    this.createColorPicker("#colorPickerSecondary");
-    this.createColorPicker("#colorPickerActions");
-    this.createColorPicker("#colorPickerFooterBackground");
-    this.createColorPicker("#colorPickerFooterPrimaryText");
-    this.createColorPicker("#colorPickerFooterSecondaryText");
-    // End Mounted()
-    this.dataChanged = false;
-  },
-  methods: {
-    createColorPicker(elementID) {
-      var el = document.querySelector(elementID);
-      var picker;
-      if (window.CP) {
-        picker = new window.CP(el); // show color picker by click (default)
-
-        // picker.target.onclick = function(e) {
-        //   e.preventDefault(); // prevent showing native color picker panel
-        // };
-        // var colorWindow = document.createElement("input");
-        // colorWindow.className = "color-code";
-        // colorWindow.pattern = "^#[A-Fa-f0-9]{6}$";
-        // colorWindow.type = "text";
-        // picker.on("enter", function() {
-        //   colorWindow.value = "#" + window.CP._HSV2HEX(this.get());
-        // });
-        // picker.on("change", function(color) {
-        //   picker.target.value = "#" + color;
-        //   colorWindow.value = "#" + color;
-        // });
-        // picker.picker.firstChild.appendChild(colorWindow);
-        // var updateColor = function() {
-        //   if (this.value.length) {
-        //     picker.set(this.value);
-        //     picker.trigger("change", [this.value.slice(1)]);
-        //   }
-        // };
-        // colorWindow.oncut = updateColor;
-        // colorWindow.onpaste = updateColor;
-        // colorWindow.onkeyup = updateColor;
-        // colorWindow.oninput = updateColor;
       }
     }
   }
