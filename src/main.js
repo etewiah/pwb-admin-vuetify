@@ -1,24 +1,45 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from "vue";
-import App from "./App";
-import router from "./router";
-import store from "./store";
-import i18n from "./i18n/";
-import axios from "axios";
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css"; // import colors from 'vuetify/es5/util/colors'
-import fontawesome from "@fortawesome/fontawesome";
-import webfonts from "@fortawesome/fontawesome-free-webfonts";
-import brands from "@fortawesome/fontawesome-free-brands";
+import Vue from "vue"
+import App from "./App"
+import router from "./router"
+import store from "./store"
+import i18n from "./i18n/"
+import axios from "axios"
+import Vuetify from "vuetify"
+import "vuetify/dist/vuetify.min.css" // import colors from 'vuetify/es5/util/colors'
+import fontawesome from "@fortawesome/fontawesome"
+import webfonts from "@fortawesome/fontawesome-free-webfonts"
+import brands from "@fortawesome/fontawesome-free-brands"
+
+// import VueAxios from 'vue-axios'
+// Vue.use(VueAxios, axios)
+Vue.axios = axios
+Vue.axios.defaults.baseURL = 'https://api-demo.websanova.com/api/v1'
 
 // let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
 
 // below needed for rails to recognise request.xhr?
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 // without above X-CSRF-Token token would not get sent from rails
 // axios.defaults.headers.common['X-CSRF-Token'] = token
 // axios.defaults.headers.common['Accept'] = 'application/json'
+
+
+
+// Http 
+// Vue.http.options.root = 'https://api-demo.websanova.com/api/v1'
+
+// Vue Auth
+Vue.router = router
+Vue.use(require('@websanova/vue-auth'), {
+    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+    rolesVar: 'type'
+})
+
+
 
 Vue.use(Vuetify, {
   theme: {
