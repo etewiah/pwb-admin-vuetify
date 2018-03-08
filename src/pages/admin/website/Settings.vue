@@ -192,29 +192,5 @@ input[type="color"] {
   border-image: initial;
   padding: 1px 2px;
 }
-/* .color-code {
-  display: block;
-  clear: both;
-  width: 170px;
-  height: 2em;
-  margin: 0;
-  padding: 0 0.5em;
-  background: #ffa;
-  border: 0;
-  border-top: 1px solid;
-  border-top-color: inherit;
-  font: normal normal 13px/2em Helmet, FreeSans, Sans-Serif;
-  color: #000;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.color-code:invalid {
-  color: #f00;
-} */
-</style>
-
-<style>
-@import "../../../../3rdparty/color-picker-master/color-picker.min.css";
 </style>
 
