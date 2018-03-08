@@ -4,39 +4,83 @@
       <v-container grid-list-xs>
         <v-flex d-flex xs12>
           <v-card color="black" dark>
+            <div style="display: inline=block; float: right;" v-show="dataChanged">
+              You have unsaved changes
+              <v-btn color="success">Save Changes</v-btn>
+            </div>
             <v-card-title primary class="title">Website Footer</v-card-title>
           </v-card>
         </v-flex>
 
-        <v-layout row wrap>
-          <v-flex xs12>
-            <v-card-title>
-              <h2>Social Links</h2>
-            </v-card-title>
-          </v-flex>
+        <v-flex d-flex xs12>
+          <v-card>
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-card-title>
+                  <h2>Social Links</h2>
+                </v-card-title>
+              </v-flex>
 
-          <v-flex xs1 style="text-align: center;">
-            <i class="fab fa-facebook-square fa-3x"></i>
-          </v-flex>
-          <v-flex xs11 sm11 md11>
-            <v-text-field label="Facebook" v-model="WebsiteSettings.social_media.facebook"></v-text-field>
-          </v-flex>
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-facebook-square fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="Facebook" v-model="WebsiteSettings.social_media.facebook" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
 
-          <v-flex xs1 style="text-align: center;">
-            <i class="fab fa-linkedin fa-3x"></i>
-          </v-flex>
-          <v-flex xs11 sm11 md11>
-            <v-text-field label="LinkedIn" v-model="WebsiteSettings.social_media.linkedin"></v-text-field>
-          </v-flex>
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-linkedin fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="LinkedIn" v-model="WebsiteSettings.social_media.linkedin" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
 
-          <v-flex xs1 style="text-align: center;">
-            <i class="fab fa-twitter fa-3x"></i>
-          </v-flex>
-          <v-flex xs11 sm11 md11>
-            <v-text-field label="Twitter" v-model="WebsiteSettings.social_media.twitter"></v-text-field>
-          </v-flex>
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-twitter fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="Twitter" v-model="WebsiteSettings.social_media.twitter" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
 
-        </v-layout>
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-youtube-square fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="YouTube" v-model="WebsiteSettings.social_media.youtube" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
+
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-google-plus-g fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="Google+" v-model="WebsiteSettings.social_media.gplus" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
+
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-instagram fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="Instagram" v-model="WebsiteSettings.social_media.instagram" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
+
+              <v-flex xs1 style="text-align: center;">
+                <i class="fab fa-pinterest-square fa-3x"></i>
+              </v-flex>
+              <v-flex xs10>
+                <v-text-field label="Pintrest" v-model="WebsiteSettings.social_media.pinterest" v-on:change="dataChanged=true"></v-text-field>
+              </v-flex>
+              <v-flex xs1></v-flex>
+
+            </v-layout>
+          </v-card>
+        </v-flex>
+
       </v-container>
     </v-slide-y-transition>
     <pre>{{ WebsiteSettings }}</pre>
@@ -49,11 +93,16 @@ let AxiosApi = require("@/store/modules/api");
 export default {
   data() {
     return {
+      dataChanged: false,
       WebsiteSettings: {
         social_media: {
-          facebook: "https://www.facebook.com/propertywebbuilder",
-          linkedin: "https://www.linkedin.com/company/propertywebbuilder",
-          twitter: "https://twitter.com/prptywebbuilder"
+          facebook: "https://www.facebook.com/empty",
+          linkedin: "https://www.linkedin.com/empty",
+          twitter: "https://twitter.com/empty",
+          youtube: "https://www.youtube.com/empty",
+          gplus: "https://plus.google.com/empty",
+          instagram: "https://www.instagram.com/empty",
+          pinterest: "https://www.pinterest.com/empty"
         }
       }
     };
@@ -61,35 +110,9 @@ export default {
   components: {},
   computed: {},
   mounted: function() {
-    // CHECK IF LOCALSTORAGE IS ALREADY LOADED
-    if (localStorage.WebSiteData.length > 10) {
-      this.WebsiteSettings = JSON.parse(localStorage.WebSiteData);
-    } else {
-      // DATA NOT LOADED IN LOCAL STORAGE: GET() DATA
-      localStorage.SiteData = "[]";
-      localStorage.WebSiteData = "[]";
-
-      AxiosApi.Get("/api/v2/agency", data => {
-        // fix some data
-        if (data) {
-          if (data.website.style_variables.body_style) {
-            var siteStyle = data.website.style_variables.body_style;
-            if (siteStyle.indexOf(".") > 0) {
-              siteStyle = siteStyle.substring(
-                siteStyle.indexOf(".") + 1,
-                siteStyle.length
-              );
-            }
-            data.website.style_variables.body_style = siteStyle;
-          }
-
-          localStorage.SiteData = JSON.stringify(data);
-          localStorage.WebSiteData = JSON.stringify(data.website); // !!remember to use JSON.parse() to read the values back
-          this.WebsiteSettings = data.website;
-          console.log("SETTINGS LOAD SUCCESS: " + data.website);
-        }
-      });
-    }
+    AxiosApi.GetWebsiteSettings(websiteData => {
+      this.WebsiteSettings = websiteData;
+    });
   },
   methods: {
     watch: {

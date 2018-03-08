@@ -155,7 +155,7 @@ const state = {
     //   router: true
     // }
   ],
-  propertyTabs: [{
+  propertyTabs2: [{
     tabValue: "general",
     tabTitleKey: "propertySections.general",
     componentName: "PropertyGeneralDetails",
@@ -180,7 +180,7 @@ const state = {
     tabTitleKey: "propertySections.photos",
     componentName: "PropertyPhotosDetails",
   }],
-  propertyLabelTabs: [{
+  propertyLabelTabs2: [{
       tabValue: "features",
       tabTitleKey: "translationsSections.extras",
       componentName: "PropertyFeatures"

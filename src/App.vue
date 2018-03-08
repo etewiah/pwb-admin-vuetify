@@ -1,21 +1,41 @@
 <template>
   <v-app>
     <v-navigation-drawer dark :mini-variant="miniVariant" :clipped="clipped" v-model="drawer" enable-resize-watcher fixed app>
-        <v-toolbar flat>
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-title >
-            <strong>Property</strong><span style="color: #cccccc;">Web</span><strong class="navy--text text--darken-1">Builder</strong>
-          </v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
-    <v-divider></v-divider>
+      <v-toolbar flat>
+        <v-list>
+          <v-list-tile>
+            <v-list-tile-title>
+              <strong>Property</strong><span style="color: #cccccc;">Web</span><strong class="navy--text text--darken-1">Builder</strong>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-toolbar>
+      <v-divider></v-divider>
       <MainNav></MainNav>
     </v-navigation-drawer>
     <v-toolbar app :clipped-left="clipped">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn>
+          <v-menu offset-y>
+            <v-btn icon light slot="activator">
+              {{$store.state.currentLocale}}
+              <v-icon light>language</v-icon>
+            </v-btn>
+            <v-list>
+              <v-list-tile v-for="lang in locales" :key="lang" @click.native="changeLocale(lang)">
+                <v-list-tile-title>
+                  <a>
+                  {{lang}}
+                </a>
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <router-view/>
@@ -35,7 +55,6 @@
     </v-footer>
   </v-app>
 </template>
-
 <script>
 import MainNav from "@/components/MainNav";
 
@@ -45,6 +64,7 @@ export default {
   },
   data() {
     return {
+      locales: ['en', 'es'],
       CopyRightYear: 2017,
       clipped: false,
       drawer: true,
@@ -56,13 +76,23 @@ export default {
     };
   },
   name: "App",
-  methods: {},
+  methods: {
+    changeLocale(to) {
+      // global.helper.ls.set('locale', to)
+      this.$store.commit('setCurrentLocale', to)
+      this.$i18n.locale = to
+      // Currently localStorage state only gets updated when locale is changed
+      localStorage.setItem('pwb_store', JSON.stringify(this.$store.state))
+      // Consider updating regularly by using the Vuex subscribe method:
+      // https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
+    },
+  },
   mounted: function() {
     var d = new Date();
     this.CopyRightYear = d.getFullYear();
-
     this.$store.dispatch("loadSetupInfo");
+    this.$i18n.locale = this.$store.state.currentLocale
   }
 };
-</script>
 
+</script>
