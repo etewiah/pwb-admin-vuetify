@@ -13,6 +13,7 @@ import WebsiteLanguages from '@/pages/admin/website/Languages'
 import WebsiteCss from '@/pages/admin/website/Sitecss'
 import WebsiteFooter from '@/pages/admin/website/Footer'
 import Login from '@/pages/Login'
+import Account from '@/pages/Account'
 
 Vue.use(Router)
 
@@ -29,9 +30,14 @@ export default new Router({
       name: 'login',
       component: Login,
       meta: { auth: false }
-    },
+    }, 
     {
-
+      path: '/account',
+      name: 'account',
+      component: Account,
+      meta: { auth: true }
+    }, 
+    {
       path: '/website/settings',
       component: WebsiteSettings,
       children: [{

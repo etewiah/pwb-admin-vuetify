@@ -18,6 +18,14 @@
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
+        <template v-if="$auth.ready() && loaded">
+          <v-btn v-show="$auth.check()" :to="{name: 'account'}">
+            <router-link :to="{name: 'account'}">account</router-link> &bull;
+          </v-btn>
+          <v-btn v-show="$auth.check()" v-on:click="logout()" href="javascript:void(0);">
+            <a>logout</a>
+          </v-btn>
+        </template>
         <v-btn>
           <v-menu offset-y>
             <v-btn icon light slot="activator">
@@ -38,7 +46,12 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <div v-if="$auth.ready()">
+        <router-view></router-view>
+      </div>
+      <div v-if="!$auth.ready()">
+        Loading ...
+      </div>
     </v-content>
     <v-navigation-drawer temporary :right="right" v-model="rightDrawer" fixed app>
       <v-list>
@@ -72,11 +85,23 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Administration"
+      title: "Administration",
+      loaded: false
     };
   },
   name: "App",
   methods: {
+    logout() {
+      this.$auth.logout({
+        makeRequest: true,
+        success() {
+          console.log('success ' + this.context);
+        },
+        error() {
+          console.log('error ' + this.context);
+        }
+      });
+    },
     changeLocale(to) {
       // global.helper.ls.set('locale', to)
       this.$store.commit('setCurrentLocale', to)
@@ -92,6 +117,12 @@ export default {
     this.CopyRightYear = d.getFullYear();
     this.$store.dispatch("loadSetupInfo");
     this.$i18n.locale = this.$store.state.currentLocale
+    var _this = this;
+    // Set up $auth.ready with other arbitrary loaders (ex: language file).
+    // debugger
+    setTimeout(function() {
+      _this.loaded = true;
+    }, 500);
   }
 };
 

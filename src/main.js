@@ -14,13 +14,20 @@ import brands from "@fortawesome/fontawesome-free-brands"
 
 // import VueAxios from 'vue-axios'
 // Vue.use(VueAxios, axios)
-Vue.axios = axios
+
+let vueAuthAxios = axios.create({
+  // baseURL: 'http://localhost:3000'
+  // baseURL: 'https://pwb-jan-2018.herokuapp.com'
+});
+
+
+Vue.axios = vueAuthAxios
 Vue.axios.defaults.baseURL = 'https://api-demo.websanova.com/api/v1'
 
 // let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
 
 // below needed for rails to recognise request.xhr?
-axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
+// axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
 // without above X-CSRF-Token token would not get sent from rails
 // axios.defaults.headers.common['X-CSRF-Token'] = token
 // axios.defaults.headers.common['Accept'] = 'application/json'

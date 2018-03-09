@@ -9,6 +9,19 @@ import pagesStore from "./modules/pages";
 import { app } from "../main";
 Vue.use(Vuex);
 
+
+// Set config defaults when creating the instance
+let vuexAxios = axios.create({
+  // baseURL: 'http://localhost:3000'
+  // baseURL: 'https://pwb-jan-2018.herokuapp.com'
+});
+
+vuexAxios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
+
+// Alter defaults after instance has been created
+// instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
+
 const store = new Vuex.Store({
   modules: {
     propertiesStore,
@@ -30,10 +43,10 @@ const store = new Vuex.Store({
   actions: {
     loadSetupInfo: function({ commit }) {
       commit("initialiseStore");
-      axios.get("/api/v2/agency").then(
+      vuexAxios.get("/api/v2/agency").then(
         response => {
-          let token = response.headers["x-csrf-token"];
-          axios.defaults.headers.common["X-CSRF-Token"] = token;
+          // let token = response.headers["x-csrf-token"];
+          // vuexAxios.defaults.headers.common["X-CSRF-Token"] = token;
           commit("setSiteData", { result: response.data });
         },
         err => {
