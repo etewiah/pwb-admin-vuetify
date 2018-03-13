@@ -34,6 +34,7 @@ const store = new Vuex.Store({
         response => {
           let token = response.headers["x-csrf-token"];
           axios.defaults.headers.common["X-CSRF-Token"] = token;
+          localStorage.csrfToken = token;
           commit("setSiteData", { result: response.data });
         },
         err => {
@@ -44,12 +45,13 @@ const store = new Vuex.Store({
   },
   mutations: {
     initialiseStore(state) {
+      localStorage.SiteData = undefined;
+      localStorage.WebSiteData = undefined; // Joe Vago's use of storing data in localStorage instead of Vuex
       let validLsPresent = false;
       let lsStore = {};
       // Check if the store exists
       if (localStorage.getItem("pwb_store")) {
         lsStore = JSON.parse(localStorage.getItem("pwb_store"));
-
         // Check the version stored against current. If different, don't
         // load the cached version
         if (lsStore.lsVersion === state.lsVersion) {
@@ -71,6 +73,11 @@ const store = new Vuex.Store({
       state.pages = result.website.admin_page_links;
       state.currencies = result.setup.currencyFieldKeys;
       state.supportedLocales = result.website.supported_locales;
+      if (localStorage.WebSiteData.length < 20) {
+        localStorage.SiteData = JSON.stringify(result);
+        result.website.hasChanges = false;
+        localStorage.WebSiteData = JSON.stringify(result.website); // !!remember to use JSON.parse() to read the values back
+      }
     },
     setCurrentLocale: (state, locale) => {
       state.currentLocale = locale;

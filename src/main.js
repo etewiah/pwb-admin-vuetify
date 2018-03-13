@@ -35,22 +35,21 @@ Vue.use(Vuetify, {
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-// Exporting here allows me to 
+// Exporting here allows me to
 // import in store/index.js and
 // set $i18n
 export const app = new Vue({
-  el: '#app',
+  el: "#app",
   router,
   store,
   i18n,
   components: { App },
-  template: '<App/>'
-})
+  template: "<App/>"
+});
 
 // Useful for debugging
 // window['vue'] = app
 // window.store = store
-
 
 // new Vue({
 //   el: "#app",

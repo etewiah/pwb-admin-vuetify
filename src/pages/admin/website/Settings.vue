@@ -3,8 +3,8 @@
     <v-slide-y-transition mode="out-in">
       <v-container grid-list-md>
         <v-flex d-flex xs12>
-          <v-card color="gray" dark>
-            <div style="display: inline=block; float: right;" v-show="dataChanged">
+          <v-card color="black" dark>
+            <div style="display: inline=block; float: right;" v-show="WebsiteSettings.hasChanges">
               You have unsaved changes
               <v-btn color="success">Save Changes</v-btn>
             </div>
@@ -18,14 +18,14 @@
                 <h2>General</h2>
               </v-card-title>
               <v-card-text>
-                <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="dataChanged=true"></v-text-field>
+                <v-text-field xs3 name="GoogleAnalyticsID" label="Google Analytics ID" value="" v-model="WebsiteSettings.analytics_id" v-on:change="DataChanged();"></v-text-field>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-title xs12>
                 <h2>Appearance</h2>
               </v-card-title>
               <v-card-text>
-                <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="dataChanged=true"></v-select>
+                <v-select label="Site Layout" :items="SiteLayout" v-model="WebsiteSettings.style_variables.body_style" v-on:change="DataChanged();"></v-select>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-title xs12>
@@ -50,49 +50,49 @@
               </v-card-title>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerPrimary" type="color" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Primary Color" value="" v-model="WebsiteSettings.style_variables.primary_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerSecondary" type="color" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Secondary Color" value="" v-model="WebsiteSettings.style_variables.secondary_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerActions" type="color" v-model="WebsiteSettings.style_variables.action_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Actions Color" value="" v-model="WebsiteSettings.style_variables.action_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterBackground" type="color" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Footer Background Color" value="" v-model="WebsiteSettings.style_variables.footer_bg_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterPrimaryText" type="color" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Footer Primary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_main_text_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
               <v-card-text>
                 <v-layout row>
-                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-flex>
+                  <v-flex xs6><input id="colorPickerFooterSecondaryText" type="color" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="DataChanged();"></v-flex>
                   <v-flex xs6>
-                    <v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="dataChanged=true"></v-text-field>
+                    <v-text-field label="Footer Secondary Text Color" value="" v-model="WebsiteSettings.style_variables.footer_sec_text_color" v-on:change="DataChanged();"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -105,16 +105,12 @@
   </v-container>
 </template>
 
-
 <script>
-// let AxiosApi = require("@/store/modules/api");
-import AxiosApi from "@/store/modules/api";
-// import("../../../../3rdparty/color-picker-master/color-picker");
+import ApiAjax from "@/store/modules/apiAjax";
 
 export default {
   data() {
     return {
-      dataChanged: false,
       WebsiteSettings: {
         analytics_id: "",
         style_variables: {
@@ -134,46 +130,59 @@ export default {
   components: {},
   computed: {},
   mounted: function() {
-    AxiosApi.GetWebsiteSettings(websiteData => {
-      websiteData = this.FixSiteLayoutJSON(websiteData);
-    });
-    this.dataChanged = false;
+    if (localStorage.WebSiteData.length > 10) {
+      this.WebsiteSettings = this.FixSiteLayoutJSON(
+        JSON.parse(localStorage.WebSiteData)
+      ); // RETURN PREVIOUSLY LOADED SETTINSS
+    } else {
+      ApiAjax.get("/api/v2/agency", data => {
+        localStorage.SiteData = JSON.stringify(data);
+        data.website.hasChanges = false; // create this setting on data load
+        this.FixSiteLayoutJSON(data.website);
+      });
+    }
     // End Mounted()
   },
   methods: {
-    FixSiteLayoutJSON(websiteData) {
-      if (websiteData) {
-        if (websiteData.style_variables.body_style) {
-          var siteStyle = websiteData.style_variables.body_style;
+    DataChanged() {
+      this.WebsiteSettings.hasChanges = true;
+      localStorage.WebSiteData = JSON.stringify(this.WebsiteSettings);
+      return true;
+    },
+    FixSiteLayoutJSON(jsonData) {
+      if (jsonData) {
+        if (jsonData.style_variables.body_style) {
+          var siteStyle = jsonData.style_variables.body_style;
           if (siteStyle.indexOf(".") > 0) {
             siteStyle = siteStyle.substring(
               siteStyle.indexOf(".") + 1,
               siteStyle.length
             );
-            websiteData.style_variables.body_style = siteStyle;
+            jsonData.style_variables.body_style = siteStyle;
           }
         }
-        if (websiteData.style_variables.primary_color.length < 6) {
-          websiteData.style_variables.primary_color = "#454545";
+        if (jsonData.style_variables.primary_color.length < 6) {
+          jsonData.style_variables.primary_color = "#454545";
         }
-        if (websiteData.style_variables.secondary_color.length < 6) {
-          websiteData.style_variables.secondary_color = "#1d1d1d";
+        if (jsonData.style_variables.secondary_color.length < 6) {
+          jsonData.style_variables.secondary_color = "#1d1d1d";
         }
-        if (websiteData.style_variables.action_color.length < 6) {
-          websiteData.style_variables.action_color = "#8f8f8f";
+        if (jsonData.style_variables.action_color.length < 6) {
+          jsonData.style_variables.action_color = "#8f8f8f";
         }
-        if (websiteData.style_variables.footer_bg_color.length < 6) {
-          websiteData.style_variables.footer_bg_color = "#454545";
+        if (jsonData.style_variables.footer_bg_color.length < 6) {
+          jsonData.style_variables.footer_bg_color = "#454545";
         }
-        if (websiteData.style_variables.footer_main_text_color.length < 6) {
-          websiteData.style_variables.footer_main_text_color = "#cfcfcf";
+        if (jsonData.style_variables.footer_main_text_color.length < 6) {
+          jsonData.style_variables.footer_main_text_color = "#cfcfcf";
         }
-        if (websiteData.style_variables.footer_sec_text_color.length < 6) {
-          websiteData.style_variables.footer_sec_text_color = "#8f8f8f";
+        if (jsonData.style_variables.footer_sec_text_color.length < 6) {
+          jsonData.style_variables.footer_sec_text_color = "#8f8f8f";
         }
-        localStorage.WebSiteData = JSON.stringify(websiteData);
-        this.WebsiteSettings = websiteData;
+        localStorage.jsonData = JSON.stringify(jsonData);
+        this.WebsiteSettings = jsonData;
       }
+      return jsonData;
     }
   }
 };
