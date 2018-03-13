@@ -12,33 +12,53 @@ export default {
         successCallback(response.data);
       },
       err => {
-        console.log(err);
-        errorCallback(err);
+        console.error("====================================");
+        console.error("===> ERROR calling API " + err.request.responseURL);
+        console.error("===> MESSAGE: " + err.message);
+        console.error("====================================");
+        return err;
       }
     );
   },
 
+  // https://pwb-jan-2018.herokuapp.com/en/users/sign_in?theme=default
   GetWebsiteSettings(successCallback, errorCallback) {
-    // CHECK IF LOCALSTORAGE IS ALREADY LOADED
     if (localStorage.WebSiteData.length > 10) {
-      successCallback(JSON.parse(localStorage.WebSiteData)); // RETURN PREVIOUSLY LOADED SETTINSS
+      return JSON.parse(localStorage.WebSiteData); // RETURN PREVIOUSLY LOADED SETTINSS
     } else {
       localStorage.SiteData = undefined; // DATA NOT LOADED IN LOCAL STORAGE: GET() DATA
       localStorage.WebSiteData = undefined;
+      // this.Get(
+      //   "/api/v2/agency",
+      //   data => {
+      //     localStorage.SiteData = JSON.stringify(data);
+      //     data.website.hasChanges = false;
+      //     localStorage.WebSiteData = JSON.stringify(data.website); // !!remember to use JSON.parse() to read the values back
+      //     resolve(data.website);
+      //     console.log("SETTINGS LOAD SUCCESS: " + data.website);
+      //   },
+      //   err => {
+      //     err = null;
+      //     reject(err.message);
+      //   }
+      // );
 
-      this.Get(
-        "api/v2/agency",
-        data => {
-          localStorage.SiteData = JSON.stringify(data);
-          localStorage.WebSiteData = JSON.stringify(data.website); // !!remember to use JSON.parse() to read the values back
-          this.WebsiteSettings = data.website;
-          console.log("SETTINGS LOAD SUCCESS: " + data.website);
+      axios.get("/api/v2/agency").then(
+        response => {
+          let token = response.headers["x-csrf-token"];
+          axios.defaults.headers.common["X-CSRF-Token"] = token;
+          localStorage.SiteData = JSON.stringify(response.data);
+          response.data.website.hasChanges = false;
+          localStorage.WebSiteData = JSON.stringify(response.data.website); // !!remember to use JSON.parse() to read the values back
+          console.log("SETTINGS LOAD SUCCESS: " + response.data.website);
+          successCallback(response.data);
         },
         err => {
-          localStorage.SiteData = "[]";
-          localStorage.WebSiteData = "[]";
-          console.log(err);
-          errorCallback(err);
+          console.error("====================================");
+          console.error("===> ERROR calling API " + err.request.responseURL);
+          console.error("===> MESSAGE: " + err.message);
+          console.error("====================================");
+          return err;
         }
       );
     }
