@@ -38,6 +38,7 @@ export default {
     fieldChangeHandler(event) {
       let newValue = event.currentTarget.value
       this.fieldDetails.newValue = newValue
+      this.$emit('updatePendingChanges', this.fieldDetails)
       this.$store.dispatch('updatePendingChanges', this.fieldDetails)
     }
   }

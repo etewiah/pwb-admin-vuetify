@@ -23,6 +23,7 @@ const store = new Vuex.Store({
     currencies: [],
     supportedLocales: [],
     currentLocale: "en",
+    currentAgency: {},
     // Below allows invalidating the localstorage store
     // by incrementing it
     lsVersion: "0.0.2"
@@ -71,6 +72,7 @@ const store = new Vuex.Store({
       }
     },
     setSiteData: (state, { result }) => {
+      state.currentAgency = result.agency;
       state.pages = result.website.admin_page_links;
       state.currencies = result.setup.currencyFieldKeys;
       state.supportedLocales = result.website.supported_locales;

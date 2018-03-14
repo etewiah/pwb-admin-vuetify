@@ -1,20 +1,21 @@
 <template>
-  <div class="mr-4">
+  <div class="mr-4 mb-1">
     <template v-if="fieldDetails.inputType == 'number'">
-      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]"></TextField>
+      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]" v-on:updatePendingChanges="updatePendingChanges(...arguments)"></TextField>
     </template>
     <template v-else-if="fieldDetails.inputType == 'select'">
       <SelectField :fieldDetails="fieldDetails" :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]" :fieldOptions="fieldOptions" :cancelPendingChanges="cancelPendingChanges"></SelectField>
-<!--       <div class="text-xs-left">
+      <!--       <div class="text-xs-left">
         {{$t(fieldDetails.labelTextTKey) }}:
       </div>
       <v-select :items="selectItems" v-model="currentFieldValue" label="Select" item-text="name" single-line bottom></v-select>
- -->    </template>
+ -->
+    </template>
     <template v-else-if="fieldDetails.inputType == 'trueFalse'">
       <SwitchField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :switchFieldValue="this.resourceModel[this.fieldDetails.fieldName]"></SwitchField>
     </template>
     <template v-else>
-      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]"></TextField>
+      <TextField :fieldDetails="fieldDetails" :cancelPendingChanges="cancelPendingChanges" :currentFieldValue="this.resourceModel[this.fieldDetails.fieldName]" v-on:updatePendingChanges="updatePendingChanges(...arguments)"></TextField>
     </template>
   </div>
 </template>
@@ -47,7 +48,18 @@ export default {
     //   }
     // }
   },
-  methods: {}
+  methods: {
+    updatePendingChanges(fieldDetailsWithNewValue) {
+      this.$emit('updatePendingChanges', fieldDetailsWithNewValue)
+
+      // if (this.currentProperty[fieldName] !== newValue) {
+      //   this.pendingChanges[fieldName] = newValue
+      // } else {
+      //   delete this.pendingChanges[fieldName]
+      // }
+      // this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
+    },
+  }
 }
 
 </script>

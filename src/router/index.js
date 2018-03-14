@@ -12,7 +12,7 @@ import WebsiteSettings from '@/pages/admin/website/Settings'
 import WebsiteLanguages from '@/pages/admin/website/Languages'
 import WebsiteCss from '@/pages/admin/website/Sitecss'
 import WebsiteFooter from '@/pages/admin/website/Footer'
-import Agency from '@/pages/AgencyDetails'
+import Agency from '@/pages/Agency'
 import AgencyDetails from '@/pages/agency/AgencyDetails'
 import AgencyLocation from '@/pages/agency/AgencyLocation'
 

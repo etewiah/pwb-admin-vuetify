@@ -28,9 +28,6 @@ export default {
     agencyTabs() {
       return this.$store.state.navigationStore.agencyTabs
     },
-    // property() {
-    //   return this.$store.state.property
-    // }
   },
   mounted: function() {
     // this.$store.dispatch('loadProperty', this.$route.params["id"])
