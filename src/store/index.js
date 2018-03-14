@@ -6,6 +6,7 @@ import propertyFeaturesStore from "./modules/property-features";
 import propertyFieldsStore from "./modules/property-fields";
 import navigationStore from "./modules/navigation";
 import pagesStore from "./modules/pages";
+import agencyStore from "./modules/agency";
 import { app } from "../main";
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     navigationStore,
     propertyFeaturesStore,
     propertyFieldsStore,
-    pagesStore
+    pagesStore,
+    agencyStore
   },
   state: {
     newProperty: "",
@@ -23,7 +25,7 @@ const store = new Vuex.Store({
     currencies: [],
     supportedLocales: [],
     currentLocale: "en",
-    currentAgency: {},
+    // currentAgency: {},
     // Below allows invalidating the localstorage store
     // by incrementing it
     lsVersion: "0.0.2"
@@ -36,6 +38,8 @@ const store = new Vuex.Store({
           let token = response.headers["x-csrf-token"];
           axios.defaults.headers.common["X-CSRF-Token"] = token;
           localStorage.csrfToken = token;
+          commit('setCurrentAgency', { result: response.data.agency })
+          // above in the agency store
           commit("setSiteData", { result: response.data });
         },
         err => {
@@ -72,7 +76,7 @@ const store = new Vuex.Store({
       }
     },
     setSiteData: (state, { result }) => {
-      state.currentAgency = result.agency;
+      // state.currentAgency = result.agency;
       state.pages = result.website.admin_page_links;
       state.currencies = result.setup.currencyFieldKeys;
       state.supportedLocales = result.website.supported_locales;

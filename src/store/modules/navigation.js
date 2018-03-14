@@ -74,11 +74,11 @@ const state = {
   // End mainNavItems
   agencyTabs: [{
     tabValue: "details",
-    tabTitleKey: "propertySections.details",
+    tabTitleKey: "agencySections.general",
     componentName: "agencyDetails",
   }, {
     tabValue: "location",
-    tabTitleKey: "propertySections.location",
+    tabTitleKey: "agencySections.location",
     componentName: "agencyLocation",
   }, ],
   propertyTabs: [{

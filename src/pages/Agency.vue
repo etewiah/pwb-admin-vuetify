@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tabs>
+    <v-tabs class="mt-4">
       <v-tabs-bar class="cyan" dark>
         <template v-for="(tab, index) in agencyTabs">
           <v-tabs-item :to="{name: tab.componentName}" ripple>

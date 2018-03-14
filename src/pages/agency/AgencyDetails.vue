@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card class="mt-3">
           <v-card-text>
-            <form @submit.prevent="onUpdatePageSettings">
+            <form @submit.prevent="onSaveAgencyDetails">
               <v-layout row>
                 <FormSubmitter :hasPendingChanges="hasPendingChanges" v-on:changesCanceled="changesCanceled"></FormSubmitter>
               </v-layout>
@@ -36,7 +36,7 @@
 <script>
 import FormSubmitter from '@/components/form-fields/FormSubmitter'
 import FieldResolver from '@/components/form-fields/FieldResolver'
-import _ from 'lodash'
+// import _ from 'lodash'
 export default {
   components: {
     FormSubmitter,
@@ -155,11 +155,10 @@ export default {
   },
   computed: {
     // cancelPendingChanges() {
-    //   // debugger
     //   return this.$store.state.propertiesStore.cancelPendingChanges
     // },
     currentAgency() {
-      return this.$store.state.currentAgency
+      return this.$store.state.agencyStore.currentAgency
     },
   },
   mounted() {
@@ -168,19 +167,17 @@ export default {
   methods: {
     changesCanceled() {
       let that = this
-      // Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
-      //   // let changedTitleField = _.find(that.pageTitleFields, { fieldName: pendingChangeKey })
-      //   // changedTitleField.fieldValue = _.cloneDeep(that.currentAgency[pendingChangeKey])
-      //   that.currentAgency[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
-      // })
       this.pendingChanges = {}
       this.hasPendingChanges = false
+      // Below is observed by each of the fields.
+      // When it changes from false to true they get reset to their initial values
       this.cancelPendingChanges = true
     },
     updatePendingChanges(fieldDetailsWithNewValue) {
       this.cancelPendingChanges = false
       let newValue = fieldDetailsWithNewValue.newValue
-      if (this.currentAgency[fieldDetailsWithNewValue.fieldName] !== newValue) {
+      let serverSavedValue = this.currentAgency[fieldDetailsWithNewValue.fieldName] || ""
+      if (serverSavedValue !== newValue) {
         this.pendingChanges[fieldDetailsWithNewValue.fieldName] = newValue
       } else {
         delete this.pendingChanges[fieldDetailsWithNewValue.fieldName]
@@ -188,24 +185,16 @@ export default {
       this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
     },
 
-    // onTitleChange(fieldName, newValue) {
-    //   if (this.currentAgency[fieldName] !== newValue) {
-    //     this.pendingChanges[fieldName] = newValue
-    //   } else {
-    //     delete this.pendingChanges[fieldName]
-    //   }
-    //   this.hasPendingChanges = Object.keys(this.pendingChanges).length > 0
-    // },
-    // onUpdatePageSettings() {
-    //   var that = this
-    //   Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
-    //     that.currentAgency[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
-    //   })
-    //   this.$store.dispatch('updatePage')
-    //   // TODO: ensure above is successfull before calling below:
-    //   this.pendingChanges = {}
-    //   this.hasPendingChanges = false
-    // }
+    onSaveAgencyDetails() {
+      var that = this
+      Object.keys(this.pendingChanges).forEach(function(pendingChangeKey) {
+        that.currentAgency[pendingChangeKey] = that.pendingChanges[pendingChangeKey]
+      })
+      this.$store.dispatch('updateAgency')
+      // TODO: ensure above is successfull before calling below:
+      this.pendingChanges = {}
+      this.hasPendingChanges = false
+    }
 
   }
 }
