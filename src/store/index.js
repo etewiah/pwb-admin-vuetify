@@ -25,7 +25,7 @@ const store = new Vuex.Store({
     currentLocale: "en",
     // Below allows invalidating the localstorage store
     // by incrementing it
-    lsVersion: "0.0.1"
+    lsVersion: "0.0.2"
   },
   actions: {
     loadSetupInfo: function({ commit }) {
@@ -50,14 +50,15 @@ const store = new Vuex.Store({
       let validLsPresent = false;
       let lsStore = {};
       // Check if the store exists
-      if (localStorage.getItem("pwb_store")) {
-        lsStore = JSON.parse(localStorage.getItem("pwb_store"));
-        // Check the version stored against current. If different, don't
-        // load the cached version
-        if (lsStore.lsVersion === state.lsVersion) {
-          validLsPresent = true;
-        }
-      }
+      // 14 March 2018 - disabling this - premature optimisation that causes confusion while developing
+      // if (localStorage.getItem("pwb_store")) {
+      //   lsStore = JSON.parse(localStorage.getItem("pwb_store"));
+      //   // Check the version stored against current. If different, don't
+      //   // load the cached version
+      //   if (lsStore.lsVersion === state.lsVersion) {
+      //     validLsPresent = true;
+      //   }
+      // }
       if (validLsPresent) {
         this.replaceState(
           // If there is a valid localStore, use it to populate state
