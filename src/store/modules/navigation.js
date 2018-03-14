@@ -2,8 +2,7 @@
 
 // initial state
 const state = {
-  mainNavItems: [
-    {
+  mainNavItems: [{
       icon: 'domain',
       title: 'Properties',
       tabTitleKey: "adminSections.properties",
@@ -62,7 +61,26 @@ const state = {
         router: true
       }]
     },
+    {
+      tabTitleKey: "adminSections.agency",
+      icon: 'record_voice_over',
+      href: 'agency',
+      router: true,
+      isGroupHeader: false,
+      // childItems: []
+
+    },
   ],
+  // End mainNavItems
+  agencyTabs: [{
+    tabValue: "details",
+    tabTitleKey: "propertySections.details",
+    componentName: "agencyDetails",
+  }, {
+    tabValue: "location",
+    tabTitleKey: "propertySections.location",
+    componentName: "agencyLocation",
+  }, ],
   propertyTabs: [{
     tabValue: "general",
     tabTitleKey: "propertySections.general",
@@ -107,104 +125,53 @@ const state = {
     //   tabValue: "transaction-status",
     //   tabTitleKey: "translationsSections.propertyLabels",
     //   componentName: "TransactionStatus"
-  },
-    // {
-    //     icon: "fa fa-home",
-    //     tabTitleKey: "adminSections.start",
-    //     tabRoute: "admin.setup"
-    //     // tabRoute: "admin.inicio"
-    //   }, {
-    //     tabTitleKey: "adminSections.properties",
-    //     tabRoute: "admin.propiedades",
-    //     icon: 'domain',
-    //     text: 'Properties',
-    //     href: 'properties',
-    //     router: true,
-    //   },
-    //   icon: "fa fa-exchange",
-    //   tabTitleKey: "adminSections.import",
-    //   tabRoute: "admin.io"
-    // }, {
-    //   icon: "fa fa-user",
-    //   tabTitleKey: "adminSections.agencyDetails",
-    //   tabRoute: "admin.agency"
-    // }, {
-    //   icon: "contacts",
-    //   tabTitleKey: "adminSections.about",
-    //   href: 'about',
-    //   router: true
-    // }, {
-    //   icon: 'money',
-    //   text: 'Currencies',
-    //   href: 'currencies',
-    //   router: true
-    // }, {
-    //   icon: 'pages',
-    //   tabTitleKey: 'Admin Pages',
-    //   href: 'admin-pages-list',
-    //   router: true
-    // }, {
-    //   icon: 'contacts',
-    //   tabTitleKey: 'Contacts',
-    //   href: 'contacts',
-    //   router: true
-    // }, {
-    //   icon: 'contacts',
-    //   tabTitleKey: 'Create contact',
-    //   href: 'CreateContact',
-    //   router: true
-    // }
-  ],
-  propertyTabs2: [{
-    tabValue: "general",
-    tabTitleKey: "propertySections.general",
-    componentName: "PropertyGeneralDetails",
-  }, {
-    tabValue: "text",
-    tabTitleKey: "propertySections.text",
-    componentName: "PropertyTextDetails",
-  }, {
-    tabValue: "sale-rental",
-    tabTitleKey: "propertySections.sale",
-    componentName: "PropertySaleDetails",
-  }, {
-    tabValue: "location",
-    tabTitleKey: "propertySections.location",
-    componentName: "PropertyLocationDetails",
-  }, {
-    tabValue: "features",
-    tabTitleKey: "propertySections.extras",
-    componentName: "PropertyFeaturesDetails",
-  }, {
-    tabValue: "photos",
-    tabTitleKey: "propertySections.photos",
-    componentName: "PropertyPhotosDetails",
-  }],
-  propertyLabelTabs2: [{
-      tabValue: "features",
-      tabTitleKey: "translationsSections.extras",
-      componentName: "PropertyFeatures"
-    }, {
-      tabValue: "property-types",
-      tabTitleKey: "translationsSections.propertyTypes",
-      componentName: "PropertyTypes"
-      // }, {
-      //   tabValue: "property-origins",
-      //   tabTitleKey: "translationsSections.propertyOrigins"
-    }, {
-      tabValue: "property-states",
-      tabTitleKey: "translationsSections.propertyStates",
-      componentName: "PropertyStates"
-      // }, {
-      //   tabValue: "transaction-status",
-      //   tabTitleKey: "translationsSections.propertyLabels",
-      //   componentName: "TransactionStatus"
-    }
-    // ,{
-    //   tabValue: "provinces",
-    //   tabTitleKey: "translationsSections.provinces"
-    // }
-  ],
+  }, ],
+  // propertyTabs2: [{
+  //   tabValue: "general",
+  //   tabTitleKey: "propertySections.general",
+  //   componentName: "PropertyGeneralDetails",
+  // }, {
+  //   tabValue: "text",
+  //   tabTitleKey: "propertySections.text",
+  //   componentName: "PropertyTextDetails",
+  // }, {
+  //   tabValue: "sale-rental",
+  //   tabTitleKey: "propertySections.sale",
+  //   componentName: "PropertySaleDetails",
+  // }, {
+  //   tabValue: "location",
+  //   tabTitleKey: "propertySections.location",
+  //   componentName: "PropertyLocationDetails",
+  // }, {
+  //   tabValue: "features",
+  //   tabTitleKey: "propertySections.extras",
+  //   componentName: "PropertyFeaturesDetails",
+  // }, {
+  //   tabValue: "photos",
+  //   tabTitleKey: "propertySections.photos",
+  //   componentName: "PropertyPhotosDetails",
+  // }],
+  // propertyLabelTabs2: [{
+  //     tabValue: "features",
+  //     tabTitleKey: "translationsSections.extras",
+  //     componentName: "PropertyFeatures"
+  //   }, {
+  //     tabValue: "property-types",
+  //     tabTitleKey: "translationsSections.propertyTypes",
+  //     componentName: "PropertyTypes"
+  //     // }, {
+  //     //   tabValue: "property-origins",
+  //     //   tabTitleKey: "translationsSections.propertyOrigins"
+  //   }, {
+  //     tabValue: "property-states",
+  //     tabTitleKey: "translationsSections.propertyStates",
+  //     componentName: "PropertyStates"
+  //     // }, {
+  //     //   tabValue: "transaction-status",
+  //     //   tabTitleKey: "translationsSections.propertyLabels",
+  //     //   componentName: "TransactionStatus"
+  //   }
+  // ],
 }
 
 // getters
