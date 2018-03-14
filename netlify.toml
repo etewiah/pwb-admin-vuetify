@@ -1,0 +1,23 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true 
+[[redirects]]
+  from = "/api/*"
+  to = "https://pwb-jan-2018.herokuapp.com/api/:splat"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/en/users/*"
+  to = "https://pwb-jan-2018.herokuapp.com/en/users/:splat"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/assets/pwb/*"
+  to = "https://pwb-jan-2018.herokuapp.com/assets/pwb/:splat"
+  status = 200
+  force = true
