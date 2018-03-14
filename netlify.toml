@@ -2,7 +2,7 @@
   publish = "dist"
   command = "npm run build"
 [[redirects]]
-  from = "/*"
+  from = "/admin-vue/*"
   to = "/index.html"
   status = 200
   force = true 
