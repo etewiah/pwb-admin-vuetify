@@ -22,6 +22,15 @@ To see the admin panel, login as user admin@example.com with a password of "pwb1
 You can find the source code for the old admin panel built with emberjs here:
 https://github.com/etewiah/property_web_builder_admin
 
+
+## Deploy to netlify
+
+It is easy to run this project locally or to deploy your own instance with netlify by clicking the button below:
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/etewiah/pwb-admin-vuetify)
+
+
+
 ## Build Setup
 
 ``` bash
