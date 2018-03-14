@@ -12,6 +12,7 @@ import WebsiteSettings from '@/pages/admin/website/Settings'
 import WebsiteLanguages from '@/pages/admin/website/Languages'
 import WebsiteCss from '@/pages/admin/website/Sitecss'
 import WebsiteFooter from '@/pages/admin/website/Footer'
+import WebsiteFooter2 from '@/pages/admin/website/Footer2'
 import Agency from '@/pages/Agency'
 import AgencyDetails from '@/pages/agency/AgencyDetails'
 import AgencyLocation from '@/pages/agency/AgencyLocation'
@@ -74,6 +75,14 @@ export default new Router({
       children: [{
         path: '',
         name: 'adminWebsiteFooter',
+      }, ]
+    },
+    {
+      path: '/website/footer2',
+      component: WebsiteFooter2,
+      children: [{
+        path: '',
+        name: 'adminWebsiteFooter2',
       }, ]
     },
     {

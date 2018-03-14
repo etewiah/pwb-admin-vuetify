@@ -45,8 +45,8 @@ export default {
   // props: ["currentAgency"],
   data() {
     return {
+      cancelPendingChanges: false,
       pendingChanges: {},
-      // originalValues: {},
       hasPendingChanges: false,
       mainInputFields: [{
         labelTextTKey: "fieldLabels.companyName",
@@ -150,7 +150,6 @@ export default {
           inputValue: {}
         }
       }],
-      cancelPendingChanges: false
     }
   },
   computed: {

@@ -59,6 +59,11 @@ const state = {
         text: 'Footer',
         href: 'adminWebsiteFooter',
         router: true
+      }, {
+        icon: 'vertical_align_bottom',
+        text: 'Footer2',
+        href: 'adminWebsiteFooter2',
+        router: true
       }]
     },
     {

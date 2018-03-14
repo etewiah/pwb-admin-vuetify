@@ -7,6 +7,7 @@ import propertyFieldsStore from "./modules/property-fields";
 import navigationStore from "./modules/navigation";
 import pagesStore from "./modules/pages";
 import agencyStore from "./modules/agency";
+import websiteStore from "./modules/website";
 import { app } from "../main";
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
     propertyFeaturesStore,
     propertyFieldsStore,
     pagesStore,
-    agencyStore
+    agencyStore,
+    websiteStore
   },
   state: {
     newProperty: "",
@@ -38,6 +40,8 @@ const store = new Vuex.Store({
           let token = response.headers["x-csrf-token"];
           axios.defaults.headers.common["X-CSRF-Token"] = token;
           localStorage.csrfToken = token;
+          commit('setCurrentWebsite', { result: response.data.website })
+          // above in the website store
           commit('setCurrentAgency', { result: response.data.agency })
           // above in the agency store
           commit("setSiteData", { result: response.data });
